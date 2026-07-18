@@ -1,7 +1,7 @@
 {
   "schema": "project-changelog/v1",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-18T12:02:03Z",
+  "updatedAt": "2026-07-18T12:19:40Z",
   "commitMapping": "Each entry maps to the Git commit whose subject exactly matches commitSubject.",
   "entries": [
     {
@@ -71,6 +71,25 @@
         "Package and core sources remained byte-identical to the frozen inputs."
       ],
       "commitSubject": "step(step-020): package tested rational quantization"
+    },
+    {
+      "id": "change-0004",
+      "timestamp": "2026-07-18T12:19:40Z",
+      "stepId": "step-030",
+      "type": "feature",
+      "summary": "Packaged the bounded 24-node mirror compiler with immutable semantic graph records, deterministic exact-cover lowering, strict fail-closed generation, a documented public fallback, path-independent ASDF tests, and fresh verifier correctness profiles.",
+      "files": [
+        "packages/mirror-kernel/",
+        "tests/mirror-kernel/"
+      ],
+      "verification": [
+        "Direct and ASDF gates each passed 37 checks under isolated SBCL 2.6.6.",
+        "The ASDF gate passed when invoked from an unrelated working directory.",
+        "Twelve verifier cases passed in both fresh semantic and measured correctness profiles without compiler warnings.",
+        "Exact cover, incomplete-target rejection, strict runtime rejection, public fallback, stable emission, and bit-level oracle equality passed.",
+        "No timing, allocation, portability, whole-system, or material-speedup claim was retained."
+      ],
+      "commitSubject": "step(step-030): package bounded mirror compiler"
     }
   ]
 }

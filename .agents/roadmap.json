@@ -2,7 +2,7 @@
   "schema": "agent-roadmap/v1",
   "roadmapId": "pure-lisp-kernel-lab-alpha",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-18T12:02:03Z",
+  "updatedAt": "2026-07-18T12:19:40Z",
   "mainGoalId": "goal-main",
   "nodes": [
     {
@@ -114,8 +114,15 @@
         "Reject general-compiler and material-speedup claims."
       ],
       "priority": "P1",
-      "status": "pending",
-      "evidence": []
+      "status": "done",
+      "evidence": [
+        "Direct and checkout-independent ASDF gates each passed 37 deterministic checks under isolated SBCL 2.6.6 with safety restricted to 3.",
+        "The semantic graph contained exactly 24 nodes and the accepted target covered each node exactly once in dependency order.",
+        "Disabling the ordered-fold pattern returned an unsupported result with no partial entries or schedule; unsupported strict runtime shapes signaled an error while the public wrapper preserved the documented fallback.",
+        "The standalone verifier accepted 12 deterministic cases in both fresh semantic and measured correctness profiles with no compiler warnings.",
+        "The verifier was required only to establish correctness; no timing, allocation, performance-equivalence, portability, whole-system, or material-speedup claim was retained.",
+        "Compiler and generated RQ8 wrapper sources remain byte-identical to the frozen accepted inputs, and all generated build/report artifacts stayed outside the checkout."
+      ]
     },
     {
       "id": "step-040",

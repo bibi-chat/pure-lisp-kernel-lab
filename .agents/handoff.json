@@ -49,6 +49,21 @@
         "packages/rational-quant/",
         "tests/rational-quant/"
       ]
+    },
+    {
+      "stepRef": "step-030",
+      "checks": [
+        "Direct mirror gate: 37/37 deterministic checks under isolated SBCL 2.6.6",
+        "ASDF test-op: 37/37 checks from an unrelated working directory",
+        "Verifier correctness: 12 cases in both fresh semantic and measured profiles",
+        "Exact 24-node cover and incomplete-target fail-closed assertions passed",
+        "Strict unsupported runtime shapes rejected and public fallback preserved",
+        "No material-speedup or general-compiler claim retained"
+      ],
+      "artifacts": [
+        "packages/mirror-kernel/",
+        "tests/mirror-kernel/"
+      ]
     }
   ],
   "risks": [
@@ -63,6 +78,12 @@
       "state": "open",
       "evidence": "Measurement, allocation, disassembly, RQ8 SAP access, and lawful e-graph binding checks use SBCL-specific facilities.",
       "nextCheck": "Keep portability claims false and test the declared SBCL boundary."
+    },
+    {
+      "id": "risk-shared-cwd",
+      "state": "mitigated",
+      "evidence": "Workers twice resolved initial relative add-file patches against a sibling checkout; no tracked file was overwritten, the exact untracked files were removed, and both checkouts were re-verified.",
+      "nextCheck": "Use canonical absolute release targets for every future patch and inspect both Git states after delegated writes."
     }
   ],
   "resume": {
