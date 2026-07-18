@@ -1,0 +1,51 @@
+{
+  "schema": "reasoned-claims/v1",
+  "claims": [
+    {
+      "id": "rq8-payload-storage-2048",
+      "proposition": "The declared RQ8 payload uses fewer bytes than raw binary32 payload for one 2048-value group.",
+      "conclusion": "RQ8 uses 2113 payload bytes instead of 8192, saving exactly 6079 bytes.",
+      "claimClass": "deduced",
+      "premises": [
+        "There is one signed quant byte per value.",
+        "There is one numerator byte per 32 values.",
+        "There is one exponent byte per at most 64 blocks.",
+        "A binary32 value occupies four payload bytes."
+      ],
+      "warrant": "Direct integer arithmetic over the declared representation.",
+      "countercheck": "The comparison excludes object headers, alignment, temporary buffers, and executable code.",
+      "uncertainty": "None for the payload count when the representation premises hold.",
+      "boundary": "Does not establish accuracy, encoding cost, latency, throughput, or model quality."
+    },
+    {
+      "id": "mirror-bit-exact-bounded",
+      "proposition": "The generated mirror kernel preserves the retained reference outcomes inside the checked 2048-column domain.",
+      "conclusion": "The deterministic release fixtures produced bit-equal binary32 output in both fresh verifier profiles.",
+      "claimClass": "empirically-supported",
+      "premises": [
+        "The direct and ASDF mirror suites each passed 37 checks.",
+        "Twelve deterministic differential cases passed in fresh semantic and measured correctness profiles.",
+        "The strict candidate disabled the public fallback during differential verification."
+      ],
+      "warrant": "Deterministic differential testing against the retained semantic oracle.",
+      "countercheck": "Unsupported graph shapes and incomplete targets were separately required to fail closed.",
+      "uncertainty": "The finite fixtures do not enumerate every valid input bit pattern or SBCL build.",
+      "boundary": "Does not establish a general compiler, cross-runtime portability, or material speedup."
+    },
+    {
+      "id": "whole-system-faster",
+      "proposition": "This alpha is more efficient than Mesh TensorFlow as a whole.",
+      "conclusion": "Not established by the available evidence.",
+      "claimClass": "unknown",
+      "premises": [
+        "The alpha implements bounded Lisp kernels and one symbolic graph slice.",
+        "It does not implement the supported Mesh TensorFlow surface end to end.",
+        "No representative cross-system workload was run for this release."
+      ],
+      "warrant": "A whole-system comparative claim requires both comparable implementations and a representative measured workload.",
+      "countercheck": "A payload-storage deduction and bounded kernel tests cannot be generalized to end-to-end system efficiency.",
+      "uncertainty": "The missing implementation and benchmark prevent a supported direction of comparison.",
+      "boundary": "Future evidence may change this classification; the alpha does not."
+    }
+  ]
+}

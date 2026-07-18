@@ -2,7 +2,7 @@
   "schema": "agent-roadmap/v1",
   "roadmapId": "pure-lisp-kernel-lab-alpha",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-18T12:19:40Z",
+  "updatedAt": "2026-07-18T12:30:39Z",
   "mainGoalId": "goal-main",
   "nodes": [
     {
@@ -138,8 +138,15 @@
         "Confirm README claims match fresh reports and declared negative boundaries."
       ],
       "priority": "P0",
-      "status": "pending",
-      "evidence": []
+      "status": "done",
+      "evidence": [
+        "The one-command release gate passed roadmap validation, 8 verifier integration tests, 13 lawful e-graph checks, both 62-check RQ8 modes, and the complete mirror gate under SBCL 2.6.6.",
+        "The release-content audit passed over 63 tracked or unignored candidate files and parsed 16 JSON documents with zero path, secret, key, binary, generated-artifact, whitespace, license, or claim-boundary errors.",
+        "Apache-2.0 license text, notice, contribution rules, trusted-code security boundary, CI, release notes, and evidence documentation are present.",
+        "The reasoned claim record proves only the 2048-value RQ8 payload saving, classifies bounded mirror equivalence as empirically supported, and classifies whole-system superiority as unknown.",
+        "Portfolio analysis retained one compile-pure-lisp skill and kept RQ8 and mirror-kernel as examples rather than creating overlapping skills.",
+        "All runtime/build outputs remained in disposable directories; the publishable tree contains no personal absolute path or bundled third-party source/toolchain."
+      ]
     },
     {
       "id": "step-050",

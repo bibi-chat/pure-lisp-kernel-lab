@@ -64,6 +64,28 @@
         "packages/mirror-kernel/",
         "tests/mirror-kernel/"
       ]
+    },
+    {
+      "stepRef": "step-040",
+      "checks": [
+        "Complete test-all gate passed under SBCL 2.6.6",
+        "Release audit passed over 63 candidate files and 16 JSON documents",
+        "No personal path, secret, key, binary, generated artifact, or runtime safety-0 finding",
+        "Apache-2.0 license, notice, contribution, security, CI, and release notes present",
+        "Whole-system speed claim explicitly classified unknown",
+        "Existing compile-pure-lisp skill retained without creating an overlapping skill"
+      ],
+      "artifacts": [
+        "README.md",
+        "LICENSE",
+        "NOTICE",
+        "CONTRIBUTING.md",
+        "SECURITY.md",
+        ".github/",
+        "scripts/",
+        "docs/",
+        "reports/"
+      ]
     }
   ],
   "risks": [
@@ -87,7 +109,7 @@
     }
   ],
   "resume": {
-    "deriveNextWith": "python3 ${CODEX_HOME}/skills/create-agent-roadmap/scripts/roadmap.py next .agents/roadmap.json",
+    "deriveNextWith": "python3 scripts/roadmap-check.py",
     "requiredInputs": [
       "AGENTS.md",
       ".agents/roadmap.json",

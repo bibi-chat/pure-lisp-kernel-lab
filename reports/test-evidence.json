@@ -1,0 +1,51 @@
+{
+  "schema": "bounded-test-evidence/v1",
+  "release": "v0.1.0-alpha",
+  "acceptanceRuntime": "SBCL 2.6.6",
+  "results": [
+    {
+      "component": "standalone-verifier",
+      "gate": "positive and adversarial integration",
+      "checks": 8,
+      "status": "passed"
+    },
+    {
+      "component": "lawful-egraph",
+      "gate": "exact-integer unit suite",
+      "checks": 13,
+      "status": "passed"
+    },
+    {
+      "component": "rational-quant",
+      "gate": "direct safety-3 semantic suite",
+      "checks": 62,
+      "status": "passed"
+    },
+    {
+      "component": "rational-quant",
+      "gate": "ASDF safety-3 semantic suite",
+      "checks": 62,
+      "status": "passed"
+    },
+    {
+      "component": "mirror-kernel",
+      "gate": "direct bounded compiler suite",
+      "checks": 37,
+      "status": "passed"
+    },
+    {
+      "component": "mirror-kernel",
+      "gate": "ASDF bounded compiler suite",
+      "checks": 37,
+      "status": "passed"
+    },
+    {
+      "component": "mirror-kernel",
+      "gate": "fresh semantic and measured correctness profiles",
+      "checks": 12,
+      "status": "passed"
+    }
+  ],
+  "performanceClaim": false,
+  "boundary": "Counts describe deterministic local release gates, not exhaustive state spaces or cross-runtime evidence."
+}

@@ -18,7 +18,7 @@
 - roadmap: .agents/roadmap.json
 - handoff: .agents/handoff.json
 - changelog: .agents/changelog.json
-- dispatch: python3 ${CODEX_HOME}/skills/orchestrate-project-agents/scripts/dispatch_wave.py .
-- roadmap-validator: python3 ${CODEX_HOME}/skills/create-agent-roadmap/scripts/roadmap.py
+- dispatch: python3 "${CODEX_HOME}/skills/orchestrate-project-agents/scripts/dispatch_wave.py" .
+- roadmap-validator: python3 scripts/roadmap-check.py
 - trace: CODEX_TRACE=0
 - verify: python3 scripts/test-all.py

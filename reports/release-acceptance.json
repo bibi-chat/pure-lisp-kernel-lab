@@ -1,0 +1,19 @@
+{
+  "candidateFileCount": 63,
+  "checks": {
+    "licenseAndClaimBoundaries": true,
+    "noBinaryOrGeneratedArtifacts": true,
+    "noIgnoredTrackedFiles": true,
+    "noPersonalAbsolutePaths": true,
+    "noRuntimeSafetyZero": true,
+    "noSecretOrPrivateKeyMarkers": true,
+    "regularUtf8Files": true
+  },
+  "errors": [],
+  "parsedJsonDocumentCount": 16,
+  "performanceClaim": false,
+  "release": "v0.1.0-alpha",
+  "schema": "release-acceptance/v1",
+  "scope": "tracked plus unignored working-tree files",
+  "status": "passed"
+}

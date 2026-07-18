@@ -1,0 +1,29 @@
+{
+  "schema": "storage-evidence/v1",
+  "representation": "RQ8/32/64 payload",
+  "fixture": {
+    "binary32ValueCount": 2048,
+    "blockSize": 32,
+    "blockCount": 64,
+    "blocksPerGroup": 64,
+    "groupCount": 1
+  },
+  "payloadBytes": {
+    "binary32": 8192,
+    "rq8Quants": 2048,
+    "rq8Numerators": 64,
+    "rq8Exponents": 1,
+    "rq8Total": 2113,
+    "saved": 6079
+  },
+  "exactRatios": {
+    "savedOverBinary32": "6079/8192",
+    "binary32OverRq8": "8192/2113"
+  },
+  "decimalContext": {
+    "payloadReductionFraction": 0.7420654296875,
+    "payloadCompressionRatio": 3.876952200662565
+  },
+  "claimClass": "deduced",
+  "boundary": "Payload bytes only; excludes object headers, alignment, temporary storage, accuracy, encoding cost, and runtime speed."
+}

@@ -1,0 +1,8 @@
+Pure Lisp Kernel Lab
+Copyright 2026 Pure Lisp Kernel Lab contributors
+
+This product is licensed under the Apache License, Version 2.0.
+
+This distribution does not include SBCL or Mesh TensorFlow source code.
+References to those projects describe runtime compatibility or semantic
+comparison boundaries and do not imply endorsement.

@@ -1,0 +1,21 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SBCL
+        run: sudo apt-get update && sudo apt-get install -y sbcl
+      - name: Run semantic and verifier gates
+        run: SBCL_BIN="$(command -v sbcl)" python3 scripts/test-all.py
+      - name: Audit release contents
+        run: python3 scripts/audit-release.py

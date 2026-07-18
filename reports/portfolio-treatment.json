@@ -1,0 +1,38 @@
+{
+  "schema": "portfolio-treatment/v1",
+  "workflow": "Compile and independently verify performance-critical pure Common Lisp kernels under SBCL.",
+  "scope": "project and reusable skill boundary",
+  "coverage": "full",
+  "primaryTreatment": "keep",
+  "evidence": {
+    "inspectedSkillCatalogCount": 23,
+    "duplicateSkillNames": 0,
+    "compilePureLispTriggeredBodyWords": 510,
+    "compilePureLispConditionalReferenceWords": 1782,
+    "compilePureLispTriggerOverlapCandidates": 0,
+    "wrapperValidation": "passed"
+  },
+  "rationale": "The existing compile-pure-lisp skill already owns the complete specialization and verification workflow. The public repository improves distribution, examples, tests, and evidence without creating a competing skill trigger.",
+  "componentTreatments": [
+    {
+      "component": "compile-pure-lisp",
+      "treatment": "keep",
+      "form": "skill"
+    },
+    {
+      "component": "rational-quant",
+      "treatment": "reference",
+      "form": "experimental package and deterministic fixtures"
+    },
+    {
+      "component": "mirror-kernel",
+      "treatment": "reference",
+      "form": "bounded symbolic compiler example"
+    }
+  ],
+  "limits": [
+    "Lexical trigger similarity is a candidate signal, not proof of semantic overlap.",
+    "Word counts describe instruction volume, not measured model latency.",
+    "The catalog observation does not prove future workflow frequency."
+  ]
+}

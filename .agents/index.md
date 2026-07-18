@@ -13,4 +13,4 @@ Roadmap: [`.agents/roadmap.json`](roadmap.json)
 
 Handoff evidence: [`.agents/handoff.json`](handoff.json)
 
-Dispatch readiness: `python3 ${CODEX_HOME}/skills/orchestrate-project-agents/scripts/dispatch_wave.py .`
+Dispatch readiness: `python3 "${CODEX_HOME}/skills/orchestrate-project-agents/scripts/dispatch_wave.py" .`

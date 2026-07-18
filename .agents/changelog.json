@@ -1,7 +1,7 @@
 {
   "schema": "project-changelog/v1",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-18T12:19:40Z",
+  "updatedAt": "2026-07-18T12:30:39Z",
   "commitMapping": "Each entry maps to the Git commit whose subject exactly matches commitSubject.",
   "entries": [
     {
@@ -90,6 +90,34 @@
         "No timing, allocation, portability, whole-system, or material-speedup claim was retained."
       ],
       "commitSubject": "step(step-030): package bounded mirror compiler"
+    },
+    {
+      "id": "change-0005",
+      "timestamp": "2026-07-18T12:30:39Z",
+      "stepId": "step-040",
+      "type": "release",
+      "summary": "Hardened the local alpha with Apache-2.0 licensing and provenance, public usage and security documentation, CI, portable aggregate gates, a deterministic release-content audit, bounded test evidence, exact RQ8 storage arithmetic, and explicit unknown whole-system performance status.",
+      "files": [
+        "README.md",
+        "LICENSE",
+        "NOTICE",
+        "CONTRIBUTING.md",
+        "SECURITY.md",
+        ".github/",
+        "scripts/",
+        "docs/",
+        "reports/",
+        "AGENTS.md",
+        ".agents/index.md"
+      ],
+      "verification": [
+        "The complete test-all gate passed under SBCL 2.6.6.",
+        "The release audit passed over 63 candidate files and 16 JSON documents with zero findings.",
+        "All current release files are UTF-8 text without personal absolute paths, secrets, private keys, binaries, generated build artifacts, or runtime safety-0 forms.",
+        "README claims match the machine-readable storage, test, portfolio, and reasoned-claim reports.",
+        "The robot oracle checkout remained clean."
+      ],
+      "commitSubject": "step(step-040): harden verified alpha release"
     }
   ]
 }
