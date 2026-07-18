@@ -1,0 +1,4 @@
+interface:
+  display_name: "Compile Pure Lisp"
+  short_description: "Compile pure Lisp kernels into faster native code"
+  default_prompt: "Use $compile-pure-lisp to optimize and verify this pure Common Lisp kernel for SBCL."

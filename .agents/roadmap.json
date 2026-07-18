@@ -2,7 +2,7 @@
   "schema": "agent-roadmap/v1",
   "roadmapId": "pure-lisp-kernel-lab-alpha",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-18T11:30:20Z",
+  "updatedAt": "2026-07-18T11:48:11Z",
   "mainGoalId": "goal-main",
   "nodes": [
     {
@@ -66,8 +66,15 @@
         "Confirm mismatch, mutation, compiler-warning, and output-collision cases fail closed."
       ],
       "priority": "P0",
-      "status": "pending",
-      "evidence": []
+      "status": "done",
+      "evidence": [
+        "The standalone verifier integration suite passed 8 of 8 tests under isolated SBCL 2.6.6, including positive pipeline and e-graph cases.",
+        "The lawful exact-integer e-graph unit suite passed all 13 checks under isolated SBCL 2.6.6.",
+        "Benchmark mismatch and candidate input mutation were rejected during the semantic profile before any measured profile or timing.",
+        "Compiler-warning, compiler-load-warning, unrelated-redefinition-warning, and derived-output collision cases all failed closed.",
+        "The Codex skill wrapper passed the skill-creator quick validator with its YAML dependency supplied from a disposable validation directory.",
+        "Core worker, pipeline compiler, and lawful e-graph compiler files are byte-identical to the frozen accepted inputs; release files contain no personal absolute paths or key markers."
+      ]
     },
     {
       "id": "step-020",
@@ -83,7 +90,7 @@
         "Confirm no claim generalizes beyond the declared fixtures."
       ],
       "priority": "P0",
-      "status": "pending",
+      "status": "in_progress",
       "evidence": []
     },
     {

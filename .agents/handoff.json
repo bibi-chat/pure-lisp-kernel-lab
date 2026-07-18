@@ -2,7 +2,18 @@
   "schema": "agent-handoff/v1",
   "roadmap": ".agents/roadmap.json",
   "gitOwner": "root-coordinator",
-  "activeAssignments": [],
+  "activeAssignments": [
+    {
+      "assignmentId": "package-rational-quant",
+      "agent": "/root/rational_quant",
+      "stepRef": "step-020",
+      "mode": "write",
+      "fileScopes": [
+        "packages/rational-quant/",
+        "tests/rational-quant/"
+      ]
+    }
+  ],
   "evidence": [
     {
       "stepRef": "step-000",
@@ -17,6 +28,23 @@
         ".agents/scopes/",
         ".gitignore",
         "AGENTS.md"
+      ]
+    },
+    {
+      "stepRef": "step-010",
+      "checks": [
+        "Verifier integration: 8/8 passed under isolated SBCL 2.6.6",
+        "Lawful e-graph unit suite: 13/13 passed",
+        "Mutation, benchmark mismatch, compiler warnings, and output collision rejected before acceptance",
+        "Codex skill wrapper quick validation passed",
+        "Personal-path, private-key-marker, binary, and safety-0 executable scans passed"
+      ],
+      "artifacts": [
+        "tool/",
+        "references/",
+        "tests/verifier/",
+        "tests/egraph/",
+        "skill/"
       ]
     }
   ],

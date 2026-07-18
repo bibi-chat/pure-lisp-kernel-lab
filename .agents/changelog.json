@@ -1,7 +1,7 @@
 {
   "schema": "project-changelog/v1",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-18T11:30:20Z",
+  "updatedAt": "2026-07-18T11:48:11Z",
   "commitMapping": "Each entry maps to the Git commit whose subject exactly matches commitSubject.",
   "entries": [
     {
@@ -29,6 +29,29 @@
         "Git diff whitespace validation passed."
       ],
       "commitSubject": "step(step-000): establish release repository contract"
+    },
+    {
+      "id": "change-0002",
+      "timestamp": "2026-07-18T11:48:11Z",
+      "stepId": "step-010",
+      "type": "feature",
+      "summary": "Made the pure Common Lisp kernel verifier standalone with fresh semantic and measured SBCL profiles, exact-integer lawful equality saturation, complete positive and fail-closed integration tests, contracts, and a validated Codex skill wrapper.",
+      "files": [
+        "tool/",
+        "references/",
+        "tests/verifier/",
+        "tests/egraph/",
+        "skill/"
+      ],
+      "verification": [
+        "Verifier integration suite passed 8 of 8 tests under isolated SBCL 2.6.6.",
+        "Lawful e-graph suite passed all 13 checks.",
+        "Mutation and benchmark mismatch were rejected before timing.",
+        "Compiler-warning and output-collision cases failed closed.",
+        "Skill metadata passed the skill-creator quick validator.",
+        "Core compiler files matched the frozen accepted inputs byte for byte."
+      ],
+      "commitSubject": "step(step-010): make kernel verifier standalone"
     }
   ]
 }
