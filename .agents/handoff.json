@@ -2,18 +2,7 @@
   "schema": "agent-handoff/v1",
   "roadmap": ".agents/roadmap.json",
   "gitOwner": "root-coordinator",
-  "activeAssignments": [
-    {
-      "assignmentId": "package-rational-quant",
-      "agent": "/root/rational_quant",
-      "stepRef": "step-020",
-      "mode": "write",
-      "fileScopes": [
-        "packages/rational-quant/",
-        "tests/rational-quant/"
-      ]
-    }
-  ],
+  "activeAssignments": [],
   "evidence": [
     {
       "stepRef": "step-000",
@@ -45,6 +34,20 @@
         "tests/verifier/",
         "tests/egraph/",
         "skill/"
+      ]
+    },
+    {
+      "stepRef": "step-020",
+      "checks": [
+        "Direct RQ8 gate: 62/62 checks under isolated SBCL 2.6.6 and safety minimum 3",
+        "ASDF test-op: 62/62 checks after fresh isolated compilation",
+        "No warning or serious-condition diagnostics escaped either gate",
+        "Input, tensor, and vector nonmutation assertions passed",
+        "No in-repository FASL, object, or Python bytecode artifacts were produced"
+      ],
+      "artifacts": [
+        "packages/rational-quant/",
+        "tests/rational-quant/"
       ]
     }
   ],

@@ -2,7 +2,7 @@
   "schema": "agent-roadmap/v1",
   "roadmapId": "pure-lisp-kernel-lab-alpha",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-18T11:48:11Z",
+  "updatedAt": "2026-07-18T12:02:03Z",
   "mainGoalId": "goal-main",
   "nodes": [
     {
@@ -90,8 +90,15 @@
         "Confirm no claim generalizes beyond the declared fixtures."
       ],
       "priority": "P0",
-      "status": "in_progress",
-      "evidence": []
+      "status": "done",
+      "evidence": [
+        "The direct RQ8 gate passed 62 deterministic checks under isolated SBCL 2.6.6 with the compiler safety minimum restricted to 3.",
+        "The checkout-independent ASDF test-op passed the same 62 checks after fresh compilation into a temporary output tree.",
+        "Both gates rejected escaped warning or serious-condition diagnostics; SBCL emitted informational compiler notes only.",
+        "Fixtures cover exact power-of-two scales, zero and multi-group inputs, nonfinite and subnormal rejection, bit-exact reference equality, fallback behavior, storage accounting, and input/tensor/vector nonmutation.",
+        "Package and core Lisp sources contain no safety-0 form and remain byte-identical to the frozen accepted inputs.",
+        "Documentation explicitly limits the package to SBCL and makes no performance claim."
+      ]
     },
     {
       "id": "step-030",

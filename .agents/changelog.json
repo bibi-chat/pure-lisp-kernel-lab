@@ -1,7 +1,7 @@
 {
   "schema": "project-changelog/v1",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-18T11:48:11Z",
+  "updatedAt": "2026-07-18T12:02:03Z",
   "commitMapping": "Each entry maps to the Git commit whose subject exactly matches commitSubject.",
   "entries": [
     {
@@ -52,6 +52,25 @@
         "Core compiler files matched the frozen accepted inputs byte for byte."
       ],
       "commitSubject": "step(step-010): make kernel verifier standalone"
+    },
+    {
+      "id": "change-0003",
+      "timestamp": "2026-07-18T12:02:03Z",
+      "stepId": "step-020",
+      "type": "feature",
+      "summary": "Packaged the experimental SBCL-only RQ8 codec and matrix-vector kernel with retained semantic oracles, guarded domain checks, Apache-2.0 ASDF metadata, path-independent direct and test-op gates, and explicit no-performance-claim boundaries.",
+      "files": [
+        "packages/rational-quant/",
+        "tests/rational-quant/"
+      ],
+      "verification": [
+        "Direct safety-3 gate passed 62 deterministic checks under isolated SBCL 2.6.6.",
+        "ASDF test-op passed the same 62 checks after fresh compilation outside the checkout.",
+        "No warning or serious-condition diagnostics escaped either gate.",
+        "Exact-scale, unsupported-domain, storage, fallback, bit-equivalence, and nonmutation assertions passed.",
+        "Package and core sources remained byte-identical to the frozen inputs."
+      ],
+      "commitSubject": "step(step-020): package tested rational quantization"
     }
   ]
 }
