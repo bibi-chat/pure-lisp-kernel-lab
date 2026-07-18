@@ -1,0 +1,22 @@
+{
+  "schema": "agent-scope/v1",
+  "id": "mirror-kernel",
+  "stepRef": "step-030",
+  "domain": "Bounded semantic-graph to typed-SBCL mirror compiler experiment.",
+  "goalRef": "goal-main",
+  "examples": ["24-node exact cover", "unsupported shape fails closed"],
+  "owns": ["packages/mirror-kernel/", "tests/mirror-kernel/"],
+  "readPaths": [
+    "packages/rational-quant/",
+    ".release-inputs/mirror-kernel/"
+  ],
+  "exclusiveResources": [],
+  "inputs": [
+    {"name": "rq8-package", "contract": "rational-quant/v0.1"},
+    {"name": "mirror-source", "contract": "mirror-kernel/local-experiment-v0.1"}
+  ],
+  "outputs": [{"name": "mirror-package", "contract": "mirror-kernel/v0.1"}],
+  "verification": ["SBCL_BIN=<absolute-sbcl> python3 tests/mirror-kernel/run.py"],
+  "files": [],
+  "projectVariables": {}
+}

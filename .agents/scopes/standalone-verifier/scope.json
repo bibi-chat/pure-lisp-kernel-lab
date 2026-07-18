@@ -1,0 +1,19 @@
+{
+  "schema": "agent-scope/v1",
+  "id": "standalone-verifier",
+  "stepRef": "step-010",
+  "domain": "Standalone SBCL kernel verification and bounded compiler sources.",
+  "goalRef": "goal-main",
+  "examples": ["accepted pipeline case", "rejected compiler warning"],
+  "owns": ["tool/", "references/", "tests/verifier/", "tests/egraph/", "skill/"],
+  "readPaths": [".release-inputs/compile-pure-lisp/"],
+  "exclusiveResources": [],
+  "inputs": [{"name": "skill-source", "contract": "compile-pure-lisp/local-verified"}],
+  "outputs": [{"name": "verifier", "contract": "kernel-verifier/v1"}],
+  "verification": [
+    "python3 -m unittest discover -s tests/verifier -v",
+    "SBCL_BIN=<absolute-sbcl> python3 tests/egraph/run.py"
+  ],
+  "files": [],
+  "projectVariables": {}
+}

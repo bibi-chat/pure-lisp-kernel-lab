@@ -1,0 +1,31 @@
+{
+  "schema": "agent-scope/v1",
+  "id": "release-foundation",
+  "stepRef": "step-000",
+  "domain": "Repository coordination, Git safety, and release scope contracts.",
+  "goalRef": "goal-main",
+  "examples": ["valid roadmap query", "generated key remains ignored"],
+  "owns": [
+    ".gitignore",
+    "AGENTS.md",
+    ".agents/index.md",
+    ".agents/roadmap.json",
+    ".agents/handoff.json",
+    ".agents/changelog.json",
+    ".agents/input-manifest.json",
+    ".agents/trace.schema.json",
+    ".agents/scopes/"
+  ],
+  "readPaths": [],
+  "exclusiveResources": ["git:index", "git:history"],
+  "inputs": [{"name": "release-decision", "contract": "accepted-publication-plan/v1"}],
+  "outputs": [{"name": "foundation", "contract": "release-foundation/v1"}],
+  "verification": [
+    "parse all tracked JSON",
+    "validate and query roadmap",
+    "run dispatch-wave validator",
+    "verify ignore and staged-path boundaries"
+  ],
+  "files": [],
+  "projectVariables": {}
+}

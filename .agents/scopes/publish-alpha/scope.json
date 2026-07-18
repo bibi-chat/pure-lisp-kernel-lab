@@ -1,0 +1,19 @@
+{
+  "schema": "agent-scope/v1",
+  "id": "publish-alpha",
+  "stepRef": "step-050",
+  "domain": "Public GitHub repository, tag, and release publication.",
+  "goalRef": "goal-main",
+  "examples": ["remote main equals accepted commit", "release tag resolves exactly"],
+  "owns": [],
+  "readPaths": ["README.md", "reports/release-acceptance.json", ".agents/roadmap.json"],
+  "exclusiveResources": ["github:bibi-chat/pure-lisp-kernel-lab"],
+  "inputs": [{"name": "release-candidate", "contract": "release-candidate/v1"}],
+  "outputs": [{"name": "public-release", "contract": "public-release/v1"}],
+  "verification": [
+    "gh auth status",
+    "remote main, tag, and release metadata equal the accepted local commit"
+  ],
+  "files": [],
+  "projectVariables": {"visibility": "public", "release": "v0.1.0-alpha"}
+}

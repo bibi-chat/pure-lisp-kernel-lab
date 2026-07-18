@@ -1,0 +1,50 @@
+{
+  "schema": "agent-handoff/v1",
+  "roadmap": ".agents/roadmap.json",
+  "gitOwner": "root-coordinator",
+  "activeAssignments": [],
+  "evidence": [
+    {
+      "stepRef": "step-000",
+      "checks": [
+        "Parsed 11 .agents JSON documents",
+        "Roadmap validate: valid=true, nodes=7, edges=13",
+        "Dispatch wave: valid=true, conflicts=[]",
+        "Ignore and whitespace checks passed"
+      ],
+      "artifacts": [
+        ".agents/input-manifest.json",
+        ".agents/scopes/",
+        ".gitignore",
+        "AGENTS.md"
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-github-auth",
+      "state": "open",
+      "evidence": "The GitHub CLI reports an expired credential for account bibi-chat.",
+      "nextCheck": "Run gh auth status immediately before step-050."
+    },
+    {
+      "id": "risk-sbcl-specific",
+      "state": "open",
+      "evidence": "Measurement, allocation, disassembly, RQ8 SAP access, and lawful e-graph binding checks use SBCL-specific facilities.",
+      "nextCheck": "Keep portability claims false and test the declared SBCL boundary."
+    }
+  ],
+  "resume": {
+    "deriveNextWith": "python3 ${CODEX_HOME}/skills/create-agent-roadmap/scripts/roadmap.py next .agents/roadmap.json",
+    "requiredInputs": [
+      "AGENTS.md",
+      ".agents/roadmap.json",
+      ".agents/index.md"
+    ]
+  },
+  "projectVariables": {
+    "release": "v0.1.0-alpha",
+    "license": "Apache-2.0",
+    "targetRepository": "pure-lisp-kernel-lab"
+  }
+}

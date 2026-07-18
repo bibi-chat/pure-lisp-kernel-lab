@@ -1,0 +1,156 @@
+{
+  "schema": "agent-roadmap/v1",
+  "roadmapId": "pure-lisp-kernel-lab-alpha",
+  "project": "Pure Lisp Kernel Lab",
+  "updatedAt": "2026-07-18T11:30:20Z",
+  "mainGoalId": "goal-main",
+  "nodes": [
+    {
+      "id": "goal-main",
+      "kind": "goal",
+      "title": "Publish a verified pure Common Lisp kernel laboratory",
+      "outcome": "A public v0.1.0-alpha repository lets a Common Lisp developer verify a pure reference/candidate pair under fresh SBCL semantic and measured profiles, run the experimental RQ8 and mirror-compiler examples, and inspect bounded machine-readable evidence without receiving local, secret, binary, or third-party workspace artifacts.",
+      "successCriteria": [
+        "The standalone verifier passes every positive and adversarial integration test under SBCL 2.6.6 or newer.",
+        "The lawful exact-integer e-graph passes its complete bounded unit suite.",
+        "The rational-quant and mirror-kernel ASDF systems load and pass deterministic tests from any absolute checkout path.",
+        "README, Apache-2.0 license, notices, contribution policy, CI, and claim boundaries are present and internally consistent.",
+        "A release scan finds no credentials, generated keys, binaries, toolchains, personal absolute paths, or unrelated artifacts.",
+        "The verified commit history is pushed to a public GitHub repository and tagged v0.1.0-alpha with release notes."
+      ],
+      "constraints": [
+        "Call the output generated typed Common Lisp compiled by SBCL, never a new SBCL implementation.",
+        "Keep reference implementations unchanged beside every optimized candidate.",
+        "Never use safety 0 or claim portability for SBCL-specific measured evidence.",
+        "Keep every performance claim bound to its workload, runtime, machine, and baseline.",
+        "Do not copy toolchains, binaries, TLS keys, PDFs, DOCX files, local reports, or third-party source checkouts."
+      ],
+      "status": "active"
+    },
+    {
+      "id": "step-000",
+      "kind": "step",
+      "title": "Establish the release repository contract",
+      "input": "A new empty Git repository and the accepted one-repository alpha architecture.",
+      "action": "Create ignore rules, stable agent instructions, a normalized roadmap, explicit non-overlapping scope contracts, machine-readable handoff and changelog records, validate them, and commit only the foundation.",
+      "output": "A conflict-safe release repository with one machine-readable task source and explicit security boundaries.",
+      "verification": [
+        "Parse every .agents JSON file.",
+        "Validate and query .agents/roadmap.json.",
+        "Run the durable dispatch-wave validator.",
+        "Confirm ignored secret, binary, cache, and toolchain patterns.",
+        "Confirm the foundation commit contains only foundation files."
+      ],
+      "priority": "P0",
+      "status": "done",
+      "evidence": [
+        "All 11 coordination and scope JSON documents parsed successfully.",
+        "The roadmap validator returned valid=true with 7 nodes, 13 edges, and step-000 as the sole active next step before closure.",
+        "The dispatch-wave validator returned valid=true with no conflicts or unscoped active work.",
+        "Ignore probes matched generated keys, certificates, binaries, toolchains, Python caches, agent logs, and the frozen local input staging tree.",
+        "The three immutable staged inputs are bound by file counts and deterministic tree SHA-256 values in .agents/input-manifest.json.",
+        "Git diff whitespace validation returned zero errors."
+      ]
+    },
+    {
+      "id": "step-010",
+      "kind": "step",
+      "title": "Make the SBCL kernel verifier standalone",
+      "input": "The locally verified compile-pure-lisp skill sources, contracts, and tests.",
+      "action": "Import the verifier, pipeline compiler, bounded lawful e-graph compiler, contracts, CLI documentation, and complete positive and negative tests without local path dependencies.",
+      "output": "A standalone evidence-driven SBCL kernel verification tool and optional Codex skill wrapper.",
+      "verification": [
+        "Run all verifier integration tests.",
+        "Run all lawful e-graph unit tests.",
+        "Verify a positive pipeline case and a positive e-graph case with fresh semantic and measured profiles.",
+        "Confirm mismatch, mutation, compiler-warning, and output-collision cases fail closed."
+      ],
+      "priority": "P0",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "step-020",
+      "kind": "step",
+      "title": "Package rational-quant as a tested experiment",
+      "input": "The RQ8 ASDF package with its reference and guarded SBCL kernels.",
+      "action": "Import the package, add explicit author/license/test metadata, document the numeric and storage contract, and add deterministic shape, boundary, fallback, bit-equivalence, storage, and nonmutation tests.",
+      "output": "A self-contained experimental RQ8 package with honest storage and performance boundaries.",
+      "verification": [
+        "Run rational-quant ASDF tests under SBCL.",
+        "Check finite-domain, unsupported-domain, exact-scale, realistic-scale, storage, and nonmutation cases.",
+        "Compile at safety 3 with zero warning conditions.",
+        "Confirm no claim generalizes beyond the declared fixtures."
+      ],
+      "priority": "P0",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "step-030",
+      "kind": "step",
+      "title": "Package the bounded mirror compiler experiment",
+      "input": "The tested 24-node mirror-kernel prototype and the accepted rational-quant package.",
+      "action": "Import the mirror compiler, preserve its exact-cover and fail-closed contracts, make testing checkout-path independent, and record only bit-exact and no-regression claims supported by fresh evidence.",
+      "output": "A bounded symbolic-to-typed-SBCL compiler experiment with deterministic tests and narrow evidence.",
+      "verification": [
+        "Run mirror-kernel ASDF tests from an arbitrary absolute checkout path.",
+        "Run fresh verifier correctness profiles for the generated kernel.",
+        "Confirm unsupported shapes fail closed or use the documented public fallback.",
+        "Reject general-compiler and material-speedup claims."
+      ],
+      "priority": "P1",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "step-040",
+      "kind": "step",
+      "title": "Harden and verify the alpha release",
+      "input": "The accepted standalone verifier, rational-quant package, and mirror-kernel experiment.",
+      "action": "Add public documentation, Apache-2.0 licensing and provenance, contribution/security guidance, portable test runners, CI, sanitized evidence summaries, and run the complete release gate plus path, secret, binary, and provenance scans.",
+      "output": "A locally committed v0.1.0-alpha candidate safe for public distribution.",
+      "verification": [
+        "Run python3 scripts/test-all.py successfully.",
+        "Parse every tracked JSON document and validate/query the roadmap.",
+        "Run whitespace, mode, absolute-path, secret, key, binary, and generated-artifact scans over the exact tracked set.",
+        "Confirm README claims match fresh reports and declared negative boundaries."
+      ],
+      "priority": "P0",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "step-050",
+      "kind": "step",
+      "title": "Publish the verified alpha",
+      "input": "A clean locally committed alpha candidate, authenticated GitHub CLI, and the exact tracked release set.",
+      "action": "Create a public GitHub repository, push the scoped history, create annotated tag v0.1.0-alpha, publish bounded release notes, and verify the remote refs and release metadata.",
+      "output": "A public, reproducible, explicitly experimental Pure Lisp Kernel Lab alpha release.",
+      "verification": [
+        "Verify origin points to the intended public repository.",
+        "Verify remote main equals the local accepted commit.",
+        "Verify tag v0.1.0-alpha resolves to the accepted commit.",
+        "Verify the published release notes preserve all negative claim boundaries."
+      ],
+      "priority": "P0",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "edges": [
+    {"from": "goal-main", "to": "step-000", "relation": "implemented_by"},
+    {"from": "goal-main", "to": "step-010", "relation": "implemented_by"},
+    {"from": "goal-main", "to": "step-020", "relation": "implemented_by"},
+    {"from": "goal-main", "to": "step-030", "relation": "implemented_by"},
+    {"from": "goal-main", "to": "step-040", "relation": "implemented_by"},
+    {"from": "goal-main", "to": "step-050", "relation": "implemented_by"},
+    {"from": "step-000", "to": "step-010", "relation": "precedes"},
+    {"from": "step-000", "to": "step-020", "relation": "precedes"},
+    {"from": "step-020", "to": "step-030", "relation": "precedes"},
+    {"from": "step-010", "to": "step-040", "relation": "precedes"},
+    {"from": "step-020", "to": "step-040", "relation": "precedes"},
+    {"from": "step-030", "to": "step-040", "relation": "precedes"},
+    {"from": "step-040", "to": "step-050", "relation": "precedes"}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent function trace",
+  "type": "object",
+  "required": ["seq", "scope", "function", "result"],
+  "properties": {
+    "seq": {"type": "integer", "minimum": 1},
+    "scope": {"type": "string", "minLength": 1},
+    "function": {"type": "string", "minLength": 1},
+    "input": {"type": "string"},
+    "output": {"type": "string"},
+    "result": {"type": "string", "minLength": 1},
+    "durationMs": {"type": "number", "minimum": 0},
+    "correlationId": {"type": "string"}
+  },
+  "additionalProperties": false
+}

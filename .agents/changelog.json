@@ -1,0 +1,34 @@
+{
+  "schema": "project-changelog/v1",
+  "project": "Pure Lisp Kernel Lab",
+  "updatedAt": "2026-07-18T11:30:20Z",
+  "commitMapping": "Each entry maps to the Git commit whose subject exactly matches commitSubject.",
+  "entries": [
+    {
+      "id": "change-0001",
+      "timestamp": "2026-07-18T11:30:20Z",
+      "stepId": "step-000",
+      "type": "foundation",
+      "summary": "Established a conflict-safe standalone release repository with one JSON roadmap, machine-readable handoff and changelog, frozen source-input hashes, non-overlapping scope contracts, explicit Git ownership, and release security boundaries.",
+      "files": [
+        ".gitignore",
+        "AGENTS.md",
+        ".agents/index.md",
+        ".agents/roadmap.json",
+        ".agents/handoff.json",
+        ".agents/changelog.json",
+        ".agents/input-manifest.json",
+        ".agents/trace.schema.json",
+        ".agents/scopes/"
+      ],
+      "verification": [
+        "All 11 JSON documents parsed.",
+        "Roadmap validation and next-step query passed.",
+        "Dispatch-wave validation passed with no conflicts.",
+        "Secret, binary, cache, toolchain, agent-log, and local-input ignore probes passed.",
+        "Git diff whitespace validation passed."
+      ],
+      "commitSubject": "step(step-000): establish release repository contract"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "agent-scope/v1",
+  "id": "release-integration",
+  "stepRef": "step-040",
+  "domain": "Public documentation, licensing, CI, portable runners, sanitized evidence, and release audit.",
+  "goalRef": "goal-main",
+  "examples": ["complete local alpha gate", "tracked personal path rejection"],
+  "owns": [
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    ".github/",
+    "scripts/",
+    "docs/",
+    "reports/"
+  ],
+  "readPaths": ["tool/", "references/", "packages/", "tests/"],
+  "exclusiveResources": [],
+  "inputs": [
+    {"name": "verifier", "contract": "kernel-verifier/v1"},
+    {"name": "rq8-package", "contract": "rational-quant/v0.1"},
+    {"name": "mirror-package", "contract": "mirror-kernel/v0.1"}
+  ],
+  "outputs": [{"name": "release-candidate", "contract": "release-candidate/v1"}],
+  "verification": ["python3 scripts/test-all.py", "python3 scripts/audit-release.py"],
+  "files": [],
+  "projectVariables": {"license": "Apache-2.0", "release": "v0.1.0-alpha"}
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "release-input-manifest/v1",
+  "frozenAt": "2026-07-18T11:25:38Z",
+  "hashAlgorithm": "sha256(path-utf8 + NUL + sha256(file-bytes)) over sorted relative files",
+  "inputs": [
+    {
+      "id": "compile-pure-lisp",
+      "origin": "User-owned Codex skill",
+      "stagingPath": ".release-inputs/compile-pure-lisp/",
+      "fileCount": 16,
+      "treeSha256": "3c861a774f40d5062c3c34a95987ab2f56678e0597b091ebd9de5e432c754d6f"
+    },
+    {
+      "id": "rational-quant",
+      "origin": "User-owned local benchmark package",
+      "stagingPath": ".release-inputs/rational-quant/",
+      "fileCount": 3,
+      "treeSha256": "fe3a3fdd25658a02b2e459c8f2edd547ab8b0a3783adcd249f1bc9a2ddaf0e60"
+    },
+    {
+      "id": "mirror-kernel",
+      "origin": "User-owned local benchmark experiment",
+      "stagingPath": ".release-inputs/mirror-kernel/",
+      "fileCount": 5,
+      "treeSha256": "055ca2300906ba790c5b93d56772860c0eb83a087616da6659431f49fb1d8e9a"
+    }
+  ],
+  "exclusions": [
+    "toolchains",
+    "binaries",
+    "generated TLS keys",
+    "PDF and DOCX documents",
+    "absolute-path reports",
+    "third-party source checkouts",
+    "unrelated benchmark and pet artifacts"
+  ]
+}

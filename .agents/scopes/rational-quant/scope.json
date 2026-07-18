@@ -1,0 +1,16 @@
+{
+  "schema": "agent-scope/v1",
+  "id": "rational-quant",
+  "stepRef": "step-020",
+  "domain": "Experimental shared-denominator RQ8 package and deterministic package tests.",
+  "goalRef": "goal-main",
+  "examples": ["exact power-of-two scale", "unsupported nonfinite input"],
+  "owns": ["packages/rational-quant/", "tests/rational-quant/"],
+  "readPaths": [".release-inputs/rational-quant/"],
+  "exclusiveResources": [],
+  "inputs": [{"name": "rq8-source", "contract": "rational-quant/local-experiment-v0.1"}],
+  "outputs": [{"name": "rq8-package", "contract": "rational-quant/v0.1"}],
+  "verification": ["SBCL_BIN=<absolute-sbcl> python3 tests/rational-quant/run.py"],
+  "files": [],
+  "projectVariables": {}
+}
