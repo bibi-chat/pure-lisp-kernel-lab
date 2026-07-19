@@ -2,7 +2,7 @@
   "schema": "agent-roadmap/v1",
   "roadmapId": "pure-lisp-kernel-lab-alpha",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-18T12:30:39Z",
+  "updatedAt": "2026-07-19T01:16:57Z",
   "mainGoalId": "goal-main",
   "nodes": [
     {
@@ -25,7 +25,7 @@
         "Keep every performance claim bound to its workload, runtime, machine, and baseline.",
         "Do not copy toolchains, binaries, TLS keys, PDFs, DOCX files, local reports, or third-party source checkouts."
       ],
-      "status": "active"
+      "status": "done"
     },
     {
       "id": "step-000",
@@ -162,8 +162,14 @@
         "Verify the published release notes preserve all negative claim boundaries."
       ],
       "priority": "P0",
-      "status": "pending",
-      "evidence": []
+      "status": "done",
+      "evidence": [
+        "GitHub CLI authentication was active for bibi-chat with SSH protocol, and SSH authentication returned GitHub's success banner after the live ED25519 host fingerprint matched GitHub's authenticated metadata.",
+        "The target did not previously exist; GitHub created bibi-chat/pure-lisp-kernel-lab as PUBLIC with origin git@github.com:bibi-chat/pure-lisp-kernel-lab.git.",
+        "The complete SBCL 2.6.6 release gate passed all six suites and the release audit passed 63 candidate files plus 16 JSON documents with zero findings immediately before publication.",
+        "Remote main and the peeled annotated v0.1.0-alpha tag resolve to the final step-050 commit.",
+        "The GitHub v0.1.0-alpha prerelease targets the verified tag and publishes docs/RELEASE_NOTES.md with the no-whole-system-speed and SBCL-specific boundaries intact."
+      ]
     }
   ],
   "edges": [

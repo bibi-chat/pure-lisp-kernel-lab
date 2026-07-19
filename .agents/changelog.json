@@ -1,7 +1,7 @@
 {
   "schema": "project-changelog/v1",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-18T12:30:39Z",
+  "updatedAt": "2026-07-19T01:16:57Z",
   "commitMapping": "Each entry maps to the Git commit whose subject exactly matches commitSubject.",
   "entries": [
     {
@@ -118,6 +118,26 @@
         "The robot oracle checkout remained clean."
       ],
       "commitSubject": "step(step-040): harden verified alpha release"
+    },
+    {
+      "id": "change-0006",
+      "timestamp": "2026-07-19T01:16:57Z",
+      "stepId": "step-050",
+      "type": "publication",
+      "summary": "Published the verified alpha as a public GitHub repository with SSH-authenticated history, an annotated version tag, bounded prerelease notes, exact remote-ref verification, and no expansion of the accepted efficiency claims.",
+      "files": [
+        ".agents/roadmap.json",
+        ".agents/handoff.json",
+        ".agents/changelog.json"
+      ],
+      "verification": [
+        "GitHub CLI and SSH authentication succeeded for bibi-chat after the GitHub host key was verified against authenticated metadata.",
+        "The public repository origin is git@github.com:bibi-chat/pure-lisp-kernel-lab.git.",
+        "The complete SBCL 2.6.6 gate and release audit passed immediately before publication.",
+        "Remote main and the peeled annotated v0.1.0-alpha tag resolve to the final step-050 commit.",
+        "The GitHub prerelease targets v0.1.0-alpha and preserves every negative claim boundary from docs/RELEASE_NOTES.md."
+      ],
+      "commitSubject": "step(step-050): publish verified alpha"
     }
   ]
 }

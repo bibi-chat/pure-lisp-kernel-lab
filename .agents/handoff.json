@@ -86,14 +86,28 @@
         "docs/",
         "reports/"
       ]
+    },
+    {
+      "stepRef": "step-050",
+      "checks": [
+        "GitHub CLI and SSH authentication succeeded as bibi-chat",
+        "Public repository origin is git@github.com:bibi-chat/pure-lisp-kernel-lab.git",
+        "Complete SBCL 2.6.6 test gate and release audit passed immediately before publication",
+        "Remote main and peeled v0.1.0-alpha tag equal the final step-050 commit",
+        "GitHub prerelease metadata and bounded release notes verified"
+      ],
+      "artifacts": [
+        "https://github.com/bibi-chat/pure-lisp-kernel-lab",
+        "https://github.com/bibi-chat/pure-lisp-kernel-lab/releases/tag/v0.1.0-alpha"
+      ]
     }
   ],
   "risks": [
     {
       "id": "risk-github-auth",
-      "state": "open",
-      "evidence": "The GitHub CLI reports an expired credential for account bibi-chat.",
-      "nextCheck": "Run gh auth status immediately before step-050."
+      "state": "mitigated",
+      "evidence": "GitHub CLI authentication is active for bibi-chat with SSH protocol, the new public key was uploaded, and SSH authentication returned GitHub's success banner.",
+      "nextCheck": "Re-run gh auth status before any future publication mutation."
     },
     {
       "id": "risk-sbcl-specific",
