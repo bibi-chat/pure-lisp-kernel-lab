@@ -1,9 +1,10 @@
-# rational-quant 0.1
+# rational-quant
 
-`rational-quant` is an experimental SBCL-only RQ8 codec and matrix-vector
-kernel. It stores one signed 8-bit quant per value, one biased unsigned
-8-bit numerator per 32-value block, and one signed 8-bit power-of-two
-exponent per group of at most 64 blocks.
+`rational-quant` is an experimental SBCL-only in-memory RQ8 representation
+with quantize, dequantize, and matrix-vector kernels. An `rq8-tensor` contains
+one signed 8-bit quant per value, one biased unsigned 8-bit numerator per
+32-value block, and one signed 8-bit power-of-two exponent per group of at
+most 64 blocks.
 
 The ASDF system author is `pure-lisp-kernel-lab contributors` and its license
 metadata is `Apache-2.0`.
@@ -12,6 +13,42 @@ For group exponent `E` and block numerator code `C`, the decoded block scale
 is `(C + 1) * 2^E`. The encoder chooses the scale upward so every supported
 finite input fits in `[-127, 127]`, and quantization rounds ties away from
 zero. The exported `reference-*` functions remain the semantic oracles.
+
+## Quantize and dequantize
+
+Run this example from the repository root with the checkout's ASDF system:
+
+```lisp
+(require :asdf)
+(asdf:load-asd
+ (truename "packages/rational-quant/rational-quant.asd"))
+(asdf:load-system "rational-quant")
+
+(let ((input
+        (make-array rational-quant:+block-size+
+                    :element-type 'single-float
+                    :initial-element 0.0f0)))
+  (setf (aref input 0) -127.0f0
+        (aref input (1- (length input))) 127.0f0)
+  (let* ((tensor (rational-quant:quantize-rq8 input))
+         (decoded (rational-quant:dequantize-rq8 tensor)))
+    (list tensor decoded)))
+```
+
+`quantize-rq8` returns a fresh `rq8-tensor`; `dequantize-rq8` returns a fresh
+simple `single-float` array. Neither operation mutates its input.
+
+## Serialization boundary
+
+An `rq8-tensor` is an in-memory Common Lisp value, not a stable byte
+serialization. This release defines no file format, wire format, byte order,
+object layout, version marker, or cross-version compatibility contract.
+`rq8-storage-bytes` reports the logical byte count of the three RQ8 payload
+arrays; it does not serialize a tensor and does not include Lisp object
+overhead.
+
+Do not persist or transmit raw tensor storage as a public format. A future,
+separately specified stable byte serializer may introduce an RQ8 codec.
 
 ## Supported domain
 

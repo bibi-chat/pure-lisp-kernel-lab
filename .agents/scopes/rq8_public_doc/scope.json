@@ -1,0 +1,43 @@
+{
+  "schema": "agent-scope/v1",
+  "id": "rq8_public_doc",
+  "stepRef": "step-070",
+  "domain": "Public rational-quant package documentation only.",
+  "goalRef": "goal-main",
+  "examples": [
+    "external user runs one quantize and dequantize example",
+    "reader sees that no stable byte serialization exists"
+  ],
+  "owns": [
+    "packages/rational-quant/README.md"
+  ],
+  "readPaths": [
+    ".agents/index.md",
+    "packages/rational-quant/package.lisp",
+    "packages/rational-quant/core.lisp",
+    "packages/rational-quant/rational-quant.asd",
+    "tests/rational-quant/"
+  ],
+  "exclusiveResources": [],
+  "inputs": [
+    {
+      "name": "publication-positioning",
+      "contract": "Use in-memory RQ8 representation and kernels; reserve codec for a future stable byte serializer."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "package-documentation",
+      "contract": "rq8-public-doc/v0.1.0-alpha.1"
+    }
+  ],
+  "verification": [
+    "SBCL_BIN=<absolute-sbcl> python3 tests/rational-quant/run.py",
+    "README contains quantize-rq8, dequantize-rq8, and explicit serialization boundary",
+    "git diff names only packages/rational-quant/README.md for this scope"
+  ],
+  "files": [],
+  "projectVariables": {
+    "release": "v0.1.0-alpha.1"
+  }
+}
