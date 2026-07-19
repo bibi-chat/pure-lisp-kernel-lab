@@ -1,0 +1,29 @@
+{
+  "schema": "agent-scope/v1",
+  "id": "hosted-ci",
+  "stepRef": "step-060",
+  "domain": "GitHub Actions runtime pinning and hosted release-gate reproduction.",
+  "goalRef": "goal-main",
+  "examples": ["hash-pinned SBCL 2.6.6", "successful exact-commit workflow run"],
+  "owns": [
+    ".github/workflows/test.yml",
+    "reports/release-acceptance.json"
+  ],
+  "readPaths": [
+    "scripts/test-all.py",
+    "scripts/audit-release.py"
+  ],
+  "exclusiveResources": ["github-actions:bibi-chat/pure-lisp-kernel-lab"],
+  "inputs": [{"name": "public-release", "contract": "public-release/v1"}],
+  "outputs": [{"name": "hosted-ci", "contract": "hosted-ci/v1"}],
+  "verification": [
+    "workflow pins the accepted SBCL source version and SHA-256",
+    "local gates remain unchanged and pass",
+    "GitHub Actions succeeds on the exact pushed commit"
+  ],
+  "files": [],
+  "projectVariables": {
+    "sbclVersion": "2.6.6",
+    "sourceSha256": "a65a7a30812aaf54925d1192b9b9e810f527c79911c6000b7548105aef7da34b"
+  }
+}

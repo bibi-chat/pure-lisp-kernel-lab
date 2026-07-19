@@ -7,14 +7,48 @@ on:
 permissions:
   contents: read
 
+env:
+  SBCL_VERSION: "2.6.6"
+  SBCL_SOURCE_URL: "https://downloads.sourceforge.net/project/sbcl/sbcl/2.6.6/sbcl-2.6.6-source.tar.bz2"
+  SBCL_SOURCE_SHA256: "a65a7a30812aaf54925d1192b9b9e810f527c79911c6000b7548105aef7da34b"
+
 jobs:
   deterministic-gates:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: Install SBCL
-        run: sudo apt-get update && sudo apt-get install -y sbcl
+      - name: Cache accepted SBCL runtime
+        id: cache-sbcl
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/sbcl-${{ env.SBCL_VERSION }}-install
+          key: sbcl-${{ runner.os }}-${{ runner.arch }}-${{ env.SBCL_VERSION }}-${{ env.SBCL_SOURCE_SHA256 }}
+      - name: Install SBCL build prerequisites
+        if: steps.cache-sbcl.outputs.cache-hit != 'true'
+        run: sudo apt-get update && sudo apt-get install -y sbcl build-essential curl bzip2
+      - name: Build hash-pinned SBCL
+        if: steps.cache-sbcl.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_archive="${RUNNER_TEMP}/sbcl-${SBCL_VERSION}-source.tar.bz2"
+          source_dir="${RUNNER_TEMP}/sbcl-${SBCL_VERSION}"
+          install_dir="${RUNNER_TEMP}/sbcl-${SBCL_VERSION}-install"
+          curl --fail --location --retry 3 --output "${source_archive}" "${SBCL_SOURCE_URL}"
+          printf '%s  %s\n' "${SBCL_SOURCE_SHA256}" "${source_archive}" | sha256sum --check -
+          tar -xjf "${source_archive}" --directory "${RUNNER_TEMP}"
+          cd "${source_dir}"
+          sh make.sh --prefix="${install_dir}"
+          sh install.sh --prefix="${install_dir}"
+      - name: Select accepted SBCL runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_dir="${RUNNER_TEMP}/sbcl-${SBCL_VERSION}-install"
+          test "$("${install_dir}/bin/sbcl" --version)" = "SBCL ${SBCL_VERSION}"
+          printf '%s\n' "${install_dir}/bin" >> "${GITHUB_PATH}"
+          printf 'SBCL_HOME=%s\n' "${install_dir}/lib/sbcl" >> "${GITHUB_ENV}"
       - name: Run semantic and verifier gates
         run: SBCL_BIN="$(command -v sbcl)" python3 scripts/test-all.py
       - name: Audit release contents

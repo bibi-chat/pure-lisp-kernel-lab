@@ -1,5 +1,5 @@
 {
-  "candidateFileCount": 63,
+  "candidateFileCount": 64,
   "checks": {
     "licenseAndClaimBoundaries": true,
     "noBinaryOrGeneratedArtifacts": true,
@@ -10,7 +10,7 @@
     "regularUtf8Files": true
   },
   "errors": [],
-  "parsedJsonDocumentCount": 16,
+  "parsedJsonDocumentCount": 17,
   "performanceClaim": false,
   "release": "v0.1.0-alpha",
   "schema": "release-acceptance/v1",

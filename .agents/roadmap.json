@@ -2,7 +2,7 @@
   "schema": "agent-roadmap/v1",
   "roadmapId": "pure-lisp-kernel-lab-alpha",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-19T01:16:57Z",
+  "updatedAt": "2026-07-19T01:23:49Z",
   "mainGoalId": "goal-main",
   "nodes": [
     {
@@ -16,7 +16,8 @@
         "The rational-quant and mirror-kernel ASDF systems load and pass deterministic tests from any absolute checkout path.",
         "README, Apache-2.0 license, notices, contribution policy, CI, and claim boundaries are present and internally consistent.",
         "A release scan finds no credentials, generated keys, binaries, toolchains, personal absolute paths, or unrelated artifacts.",
-        "The verified commit history is pushed to a public GitHub repository and tagged v0.1.0-alpha with release notes."
+        "The verified commit history is pushed to a public GitHub repository and tagged v0.1.0-alpha with release notes.",
+        "Hosted CI runs the unchanged release gates on hash-pinned SBCL 2.6.6 and succeeds on the public main branch."
       ],
       "constraints": [
         "Call the output generated typed Common Lisp compiled by SBCL, never a new SBCL implementation.",
@@ -25,7 +26,7 @@
         "Keep every performance claim bound to its workload, runtime, machine, and baseline.",
         "Do not copy toolchains, binaries, TLS keys, PDFs, DOCX files, local reports, or third-party source checkouts."
       ],
-      "status": "done"
+      "status": "active"
     },
     {
       "id": "step-000",
@@ -170,6 +171,22 @@
         "Remote main and the peeled annotated v0.1.0-alpha tag resolve to the final step-050 commit.",
         "The GitHub v0.1.0-alpha prerelease targets the verified tag and publishes docs/RELEASE_NOTES.md with the no-whole-system-speed and SBCL-specific boundaries intact."
       ]
+    },
+    {
+      "id": "step-060",
+      "kind": "step",
+      "title": "Make hosted CI reproduce the accepted runtime",
+      "input": "A public alpha whose workflow installs Ubuntu SBCL 2.2.9 and fails the mirror measured profile while the complete local gate passes on the declared SBCL 2.6.6 runtime.",
+      "action": "Replace the unpinned distro runtime with a cached build from the hash-verified official SBCL 2.6.6 source archive, keep the semantic and audit commands unchanged, and verify the hosted run on the exact pushed commit.",
+      "output": "Public GitHub Actions evidence that the complete release gate succeeds on the same declared SBCL version used for local acceptance.",
+      "verification": [
+        "Validate the workflow and confirm the source URL, version, and SHA-256 are explicit.",
+        "Run the complete local SBCL 2.6.6 gate and release audit without changing kernel code or claim boundaries.",
+        "Push one scoped step commit and verify its GitHub Actions run completes successfully on SBCL 2.6.6."
+      ],
+      "priority": "P0",
+      "status": "in_progress",
+      "evidence": []
     }
   ],
   "edges": [
@@ -185,6 +202,8 @@
     {"from": "step-010", "to": "step-040", "relation": "precedes"},
     {"from": "step-020", "to": "step-040", "relation": "precedes"},
     {"from": "step-030", "to": "step-040", "relation": "precedes"},
-    {"from": "step-040", "to": "step-050", "relation": "precedes"}
+    {"from": "step-040", "to": "step-050", "relation": "precedes"},
+    {"from": "goal-main", "to": "step-060", "relation": "implemented_by"},
+    {"from": "step-050", "to": "step-060", "relation": "precedes"}
   ]
 }

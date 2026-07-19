@@ -8,6 +8,7 @@
 | [mirror-kernel](scopes/mirror-kernel/scope.json) | bounded compiler | `packages/mirror-kernel/`, `tests/mirror-kernel/` | mirror-kernel/v0.1 | exact cover; unsupported shape |
 | [release-integration](scopes/release-integration/scope.json) | public release | public docs, CI, runners, reports | release-candidate/v1 | full local gate; secret rejection |
 | [publish-alpha](scopes/publish-alpha/scope.json) | GitHub publication | no source paths; GitHub resource | public-release/v1 | pushed main; verified tag |
+| [hosted-ci](scopes/hosted-ci/scope.json) | hosted runtime reproducibility | workflow and regenerated acceptance report | hosted-ci/v1 | pinned SBCL; passing public run |
 
 Roadmap: [`.agents/roadmap.json`](roadmap.json)
 

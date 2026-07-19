@@ -2,7 +2,22 @@
   "schema": "agent-handoff/v1",
   "roadmap": ".agents/roadmap.json",
   "gitOwner": "root-coordinator",
-  "activeAssignments": [],
+  "activeAssignments": [
+    {
+      "assignmentId": "assignment-hosted-ci",
+      "owner": "root-coordinator",
+      "stepRef": "step-060",
+      "scopeRef": "hosted-ci",
+      "fileScopes": [
+        ".github/workflows/test.yml",
+        "reports/release-acceptance.json"
+      ],
+      "exclusiveResources": [
+        "github-actions:bibi-chat/pure-lisp-kernel-lab"
+      ],
+      "claimedAt": "2026-07-19T01:23:49Z"
+    }
+  ],
   "evidence": [
     {
       "stepRef": "step-000",
@@ -120,6 +135,12 @@
       "state": "mitigated",
       "evidence": "Workers twice resolved initial relative add-file patches against a sibling checkout; no tracked file was overwritten, the exact untracked files were removed, and both checkouts were re-verified.",
       "nextCheck": "Use canonical absolute release targets for every future patch and inspect both Git states after delegated writes."
+    },
+    {
+      "id": "risk-hosted-ci-runtime",
+      "state": "open",
+      "evidence": "Three hosted runs installed Ubuntu SBCL 2.2.9 and failed in the mirror verifier measured profile; the same complete gate passes locally on the declared SBCL 2.6.6 runtime.",
+      "nextCheck": "Verify the exact step-060 commit completes successfully in GitHub Actions on SBCL 2.6.6."
     }
   ],
   "resume": {
