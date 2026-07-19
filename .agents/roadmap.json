@@ -2,7 +2,7 @@
   "schema": "agent-roadmap/v1",
   "roadmapId": "pure-lisp-kernel-lab-alpha",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-19T01:23:49Z",
+  "updatedAt": "2026-07-19T01:31:12Z",
   "mainGoalId": "goal-main",
   "nodes": [
     {
@@ -26,7 +26,7 @@
         "Keep every performance claim bound to its workload, runtime, machine, and baseline.",
         "Do not copy toolchains, binaries, TLS keys, PDFs, DOCX files, local reports, or third-party source checkouts."
       ],
-      "status": "active"
+      "status": "done"
     },
     {
       "id": "step-000",
@@ -185,8 +185,13 @@
         "Push one scoped step commit and verify its GitHub Actions run completes successfully on SBCL 2.6.6."
       ],
       "priority": "P0",
-      "status": "in_progress",
-      "evidence": []
+      "status": "done",
+      "evidence": [
+        "The workflow pins official SBCL 2.6.6 source URL and SHA-256 a65a7a30812aaf54925d1192b9b9e810f527c79911c6000b7548105aef7da34b, matching the previously accepted toolchain provenance.",
+        "The unchanged complete local gate passed all six suites on SBCL 2.6.6 and the release audit passed 64 candidate files plus 17 JSON documents with zero findings.",
+        "GitHub Actions run 29668603547 completed successfully on implementation commit 5191e112e272010ae88d102dd3bc0f847f57e141; its log identified SBCL 2.6.6, passed all six gates, and repeated the 64-file/17-JSON zero-error audit.",
+        "No kernel, verifier, package, benchmark, release-note, or performance-claim source changed in the hosted-runtime repair."
+      ]
     }
   ],
   "edges": [

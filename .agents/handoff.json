@@ -2,22 +2,7 @@
   "schema": "agent-handoff/v1",
   "roadmap": ".agents/roadmap.json",
   "gitOwner": "root-coordinator",
-  "activeAssignments": [
-    {
-      "assignmentId": "assignment-hosted-ci",
-      "owner": "root-coordinator",
-      "stepRef": "step-060",
-      "scopeRef": "hosted-ci",
-      "fileScopes": [
-        ".github/workflows/test.yml",
-        "reports/release-acceptance.json"
-      ],
-      "exclusiveResources": [
-        "github-actions:bibi-chat/pure-lisp-kernel-lab"
-      ],
-      "claimedAt": "2026-07-19T01:23:49Z"
-    }
-  ],
+  "activeAssignments": [],
   "evidence": [
     {
       "stepRef": "step-000",
@@ -115,6 +100,21 @@
         "https://github.com/bibi-chat/pure-lisp-kernel-lab",
         "https://github.com/bibi-chat/pure-lisp-kernel-lab/releases/tag/v0.1.0-alpha"
       ]
+    },
+    {
+      "stepRef": "step-060",
+      "checks": [
+        "Workflow contract pins official SBCL 2.6.6 source and accepted SHA-256",
+        "Complete local SBCL 2.6.6 gate passed with performance_claim=false",
+        "Release audit passed 64 candidate files and 17 JSON documents with zero findings",
+        "GitHub Actions run 29668603547 passed on implementation commit 5191e112e272010ae88d102dd3bc0f847f57e141",
+        "Hosted log identified SBCL 2.6.6 and passed every unchanged release gate"
+      ],
+      "artifacts": [
+        ".github/workflows/test.yml",
+        "reports/release-acceptance.json",
+        "https://github.com/bibi-chat/pure-lisp-kernel-lab/actions/runs/29668603547"
+      ]
     }
   ],
   "risks": [
@@ -138,9 +138,9 @@
     },
     {
       "id": "risk-hosted-ci-runtime",
-      "state": "open",
-      "evidence": "Three hosted runs installed Ubuntu SBCL 2.2.9 and failed in the mirror verifier measured profile; the same complete gate passes locally on the declared SBCL 2.6.6 runtime.",
-      "nextCheck": "Verify the exact step-060 commit completes successfully in GitHub Actions on SBCL 2.6.6."
+      "state": "mitigated",
+      "evidence": "Run 29668603547 built the hash-pinned official SBCL 2.6.6 source, passed all six unchanged gates, and completed the zero-error release audit on the exact implementation commit.",
+      "nextCheck": "On future workflow or runtime changes, require a successful exact-commit hosted run."
     }
   ],
   "resume": {

@@ -1,7 +1,7 @@
 {
   "schema": "project-changelog/v1",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-19T01:16:57Z",
+  "updatedAt": "2026-07-19T01:31:12Z",
   "commitMapping": "Each entry maps to the Git commit whose subject exactly matches commitSubject.",
   "entries": [
     {
@@ -138,6 +138,46 @@
         "The GitHub prerelease targets v0.1.0-alpha and preserves every negative claim boundary from docs/RELEASE_NOTES.md."
       ],
       "commitSubject": "step(step-050): publish verified alpha"
+    },
+    {
+      "id": "change-0007",
+      "timestamp": "2026-07-19T01:27:11Z",
+      "stepId": "step-060",
+      "type": "ci-repair",
+      "summary": "Replaced the unsupported Ubuntu SBCL 2.2.9 test runtime with a cached build from the hash-pinned official SBCL 2.6.6 source while leaving every semantic, audit, kernel, and claim boundary unchanged.",
+      "files": [
+        ".agents/roadmap.json",
+        ".agents/handoff.json",
+        ".agents/index.md",
+        ".agents/scopes/hosted-ci/scope.json",
+        ".github/workflows/test.yml",
+        "reports/release-acceptance.json"
+      ],
+      "verification": [
+        "Workflow parsing and structural assertions confirmed explicit version, source URL, accepted SHA-256, runtime cache, and version check.",
+        "The workflow source SHA-256 exactly matched the previously accepted SBCL 2.6.6 toolchain provenance.",
+        "The complete local gate passed all six suites on SBCL 2.6.6 and the updated release audit passed with zero findings.",
+        "GitHub Actions run 29668603547 passed on the exact implementation commit and identified runtime SBCL 2.6.6."
+      ],
+      "commitSubject": "step(step-060): pin hosted sbcl runtime"
+    },
+    {
+      "id": "change-0008",
+      "timestamp": "2026-07-19T01:31:12Z",
+      "stepId": "step-060",
+      "type": "hosted-evidence",
+      "summary": "Closed the hosted-runtime repair from a successful exact-commit GitHub Actions run and restored the main goal to done without changing the published experimental claim boundary.",
+      "files": [
+        ".agents/roadmap.json",
+        ".agents/handoff.json",
+        ".agents/changelog.json"
+      ],
+      "verification": [
+        "GitHub Actions run 29668603547 concluded success for commit 5191e112e272010ae88d102dd3bc0f847f57e141.",
+        "The hosted log reported SBCL 2.6.6, all six unchanged gates passed, performance_claim=false, and a 64-file/17-JSON zero-error audit.",
+        "Roadmap validation returned no remaining next step and dispatch validation returned no active or ready scope."
+      ],
+      "commitSubject": "step(step-060): record passing hosted gates"
     }
   ]
 }
