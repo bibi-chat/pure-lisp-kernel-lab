@@ -1,0 +1,52 @@
+{
+  "schema": "agent-scope/v1",
+  "id": "release_positioning",
+  "stepRef": "step-071",
+  "domain": "Root public narrative, bounded release notes, and exact storage evidence.",
+  "goalRef": "goal-main",
+  "examples": [
+    "reader compares binary32, ordinary Q8, and RQ8 in one table",
+    "machine reader derives the exact 191-byte saving over Q8"
+  ],
+  "owns": [
+    "README.md",
+    "docs/EVIDENCE.md",
+    "docs/RELEASE_NOTES.md",
+    "reports/claims.json",
+    "reports/storage-evidence.json"
+  ],
+  "readPaths": [
+    ".agents/index.md",
+    "packages/rational-quant/package.lisp",
+    "packages/rational-quant/core.lisp",
+    "packages/rational-quant/rational-quant.asd",
+    "reports/test-evidence.json"
+  ],
+  "exclusiveResources": [],
+  "inputs": [
+    {
+      "name": "fair-storage-baseline",
+      "contract": "For 2,048 values: binary32=8,192 bytes, Q8 plus 64 float32 scales=2,304 bytes, RQ8=2,113 bytes, RQ8 saves 191 bytes or 8.289930555555555 percent versus Q8."
+    },
+    {
+      "name": "claim-boundary",
+      "contract": "No runtime speed, portability, model quality, general compiler, or stable serialization claim."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "public-positioning",
+      "contract": "release-positioning/v0.1.0-alpha.1"
+    }
+  ],
+  "verification": [
+    "python3 -m json.tool reports/claims.json",
+    "python3 -m json.tool reports/storage-evidence.json",
+    "exact storage arithmetic assertions pass",
+    "root README contains no Mesh TensorFlow reference or runtime performance claim"
+  ],
+  "files": [],
+  "projectVariables": {
+    "release": "v0.1.0-alpha.1"
+  }
+}

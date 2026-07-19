@@ -9,6 +9,9 @@
 | [release-integration](scopes/release-integration/scope.json) | public release | public docs, CI, runners, reports | release-candidate/v1 | full local gate; secret rejection |
 | [publish-alpha](scopes/publish-alpha/scope.json) | GitHub publication | no source paths; GitHub resource | public-release/v1 | pushed main; verified tag |
 | [hosted-ci](scopes/hosted-ci/scope.json) | hosted runtime reproducibility | workflow and regenerated acceptance report | hosted-ci/v1 | pinned SBCL; passing public run |
+| [rq8_public_doc](scopes/rq8_public_doc/scope.json) | public RQ8 package boundary | package README only | rq8-public-doc/v0.1.0-alpha.1 | unary example; no serialization claim |
+| [release_positioning](scopes/release_positioning/scope.json) | fair public evidence | root README, evidence docs, release notes, claim reports | release-positioning/v0.1.0-alpha.1 | Q8 baseline; bounded alpha.1 notes |
+| [publish_alpha1](scopes/publish_alpha1/scope.json) | corrected GitHub publication | coordinator-owned Git and GitHub resources | public-release/v0.1.0-alpha.1 | passing merge; immutable tag; profile pin |
 
 Roadmap: [`.agents/roadmap.json`](roadmap.json)
 

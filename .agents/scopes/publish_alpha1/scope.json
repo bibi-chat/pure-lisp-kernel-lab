@@ -1,0 +1,47 @@
+{
+  "schema": "agent-scope/v1",
+  "id": "publish_alpha1",
+  "stepRef": "step-080",
+  "domain": "Coordinator-owned Git integration, GitHub metadata, profile pin, tag, and prerelease.",
+  "goalRef": "goal-main",
+  "examples": [
+    "v0.1.0-alpha.1 resolves to passing merged main",
+    "v0.1.0-alpha is visibly superseded without moving its tag"
+  ],
+  "owns": [],
+  "readPaths": [
+    "README.md",
+    "packages/rational-quant/README.md",
+    "docs/RELEASE_NOTES.md",
+    "reports/release-acceptance.json",
+    ".agents/roadmap.json"
+  ],
+  "exclusiveResources": [
+    "git:pure-lisp-kernel-lab",
+    "github:bibi-chat/pure-lisp-kernel-lab",
+    "github-profile:bibi-chat"
+  ],
+  "inputs": [
+    {
+      "name": "accepted-release-candidate",
+      "contract": "release-candidate/v0.1.0-alpha.1"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "public-release",
+      "contract": "public-release/v0.1.0-alpha.1"
+    }
+  ],
+  "verification": [
+    "complete local gate and release audit pass",
+    "hosted pull-request and merged-main gates pass",
+    "repository metadata and profile pin match the accepted positioning",
+    "remote peeled tag and prerelease target the accepted commit"
+  ],
+  "files": [],
+  "projectVariables": {
+    "repository": "bibi-chat/pure-lisp-kernel-lab",
+    "release": "v0.1.0-alpha.1"
+  }
+}

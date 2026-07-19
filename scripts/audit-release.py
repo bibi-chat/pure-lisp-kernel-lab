@@ -13,6 +13,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "release-acceptance.json"
+RELEASE = "v0.1.0-alpha.1"
 MAX_FILE_BYTES = 2 * 1024 * 1024
 FORBIDDEN_SUFFIXES = {
     ".core",
@@ -117,12 +118,13 @@ def audit_file(relative: str, errors: list[dict[str, str]]) -> bool:
 
 def validate_contracts(errors: list[dict[str, str]]) -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    normalized_readme = " ".join(readme.split())
     for phrase in (
         "not an SBCL fork",
-        "not a Mesh TensorFlow replacement",
+        "not a general Common Lisp or tensor compiler",
         "No whole-system speed claim",
     ):
-        if phrase not in readme:
+        if phrase not in normalized_readme:
             add_error(errors, "README.md", "missing-claim-boundary")
     license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
     if "Apache License" not in license_text or "Version 2.0" not in license_text:
@@ -158,7 +160,7 @@ def write_report(
 ) -> None:
     report = {
         "schema": "release-acceptance/v1",
-        "release": "v0.1.0-alpha",
+        "release": RELEASE,
         "status": status,
         "scope": "tracked plus unignored working-tree files",
         "candidateFileCount": len(files),

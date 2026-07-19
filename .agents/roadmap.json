@@ -2,14 +2,14 @@
   "schema": "agent-roadmap/v1",
   "roadmapId": "pure-lisp-kernel-lab-alpha",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-19T01:31:12Z",
+  "updatedAt": "2026-07-19T02:14:07Z",
   "mainGoalId": "goal-main",
   "nodes": [
     {
       "id": "goal-main",
       "kind": "goal",
       "title": "Publish a verified pure Common Lisp kernel laboratory",
-      "outcome": "A public v0.1.0-alpha repository lets a Common Lisp developer verify a pure reference/candidate pair under fresh SBCL semantic and measured profiles, run the experimental RQ8 and mirror-compiler examples, and inspect bounded machine-readable evidence without receiving local, secret, binary, or third-party workspace artifacts.",
+      "outcome": "A public v0.1.0-alpha.1 repository lets a Common Lisp developer verify a pure reference/candidate pair under fresh SBCL semantic and measured profiles, run the experimental RQ8 and mirror-compiler examples, compare RQ8 fairly with ordinary Q8, and inspect bounded machine-readable evidence without receiving local, secret, binary, or third-party workspace artifacts.",
       "successCriteria": [
         "The standalone verifier passes every positive and adversarial integration test under SBCL 2.6.6 or newer.",
         "The lawful exact-integer e-graph passes its complete bounded unit suite.",
@@ -17,7 +17,10 @@
         "README, Apache-2.0 license, notices, contribution policy, CI, and claim boundaries are present and internally consistent.",
         "A release scan finds no credentials, generated keys, binaries, toolchains, personal absolute paths, or unrelated artifacts.",
         "The verified commit history is pushed to a public GitHub repository and tagged v0.1.0-alpha with release notes.",
-        "Hosted CI runs the unchanged release gates on hash-pinned SBCL 2.6.6 and succeeds on the public main branch."
+        "Hosted CI runs the unchanged release gates on hash-pinned SBCL 2.6.6 and succeeds on the public main branch.",
+        "README and machine-readable evidence compare RQ8 with both binary32 and ordinary Q8 plus float32 scales, describe the package as in-memory until serialization exists, and show one runnable unary API example.",
+        "The GitHub description, topics, and profile pin expose the repository's Common Lisp, SBCL, RQ8, and kernel-verification purpose.",
+        "The immutable v0.1.0-alpha.1 prerelease resolves to a successful hosted-gate commit and identifies v0.1.0-alpha as superseded."
       ],
       "constraints": [
         "Call the output generated typed Common Lisp compiled by SBCL, never a new SBCL implementation.",
@@ -26,7 +29,7 @@
         "Keep every performance claim bound to its workload, runtime, machine, and baseline.",
         "Do not copy toolchains, binaries, TLS keys, PDFs, DOCX files, local reports, or third-party source checkouts."
       ],
-      "status": "done"
+      "status": "active"
     },
     {
       "id": "step-000",
@@ -192,6 +195,63 @@
         "GitHub Actions run 29668603547 completed successfully on implementation commit 5191e112e272010ae88d102dd3bc0f847f57e141; its log identified SBCL 2.6.6, passed all six gates, and repeated the 64-file/17-JSON zero-error audit.",
         "No kernel, verifier, package, benchmark, release-note, or performance-claim source changed in the hosted-runtime repair."
       ]
+    },
+    {
+      "id": "step-070",
+      "kind": "step",
+      "title": "Clarify the public rational-quant contract",
+      "input": "The published SBCL-only rational-quant package and the decision to defer a stable byte serialization contract.",
+      "action": "Replace codec wording with an explicit in-memory representation boundary, add one runnable unary API example, and preserve the existing numeric, shape, safety, and no-performance-claim contracts.",
+      "output": "Package documentation that tells an external Common Lisp developer exactly what can be used today and what remains unsupported.",
+      "verification": [
+        "Run the direct rational-quant deterministic gate.",
+        "Confirm the package README contains a runnable quantize/dequantize example and an explicit no-serialization boundary.",
+        "Confirm no package source or test file changed."
+      ],
+      "priority": "P0",
+      "status": "done",
+      "evidence": [
+        "The package README now describes an in-memory RQ8 representation rather than a byte codec and explicitly defers any stable file or wire format.",
+        "The documented unary quantize/dequantize example executed under SBCL 2.6.6 and returned a 32-value decoded single-float array with the declared endpoints.",
+        "The direct rational-quant gate passed all 62 deterministic checks under SBCL 2.6.6; no package source or test file changed."
+      ]
+    },
+    {
+      "id": "step-071",
+      "kind": "step",
+      "title": "Correct public RQ8 positioning and storage evidence",
+      "input": "The current public README, release notes, evidence explanation, and machine-readable storage and claim reports.",
+      "action": "Lead with the connected verifier-to-RQ8-to-mirror story, compare binary32, ordinary Q8 plus float32 scales, and RQ8, remove repeated Mesh TensorFlow disclaimers from the root README, and prepare alpha.1 notes without expanding product claims.",
+      "output": "Consistent public documentation and exact machine-readable evidence for the additional 191-byte RQ8 saving over ordinary Q8 per 2,048 values.",
+      "verification": [
+        "Parse the changed JSON evidence documents.",
+        "Check the exact 8,192, 2,304, 2,113, and 191 byte arithmetic and derived ratios.",
+        "Confirm the root README has no Mesh TensorFlow reference and makes no runtime performance claim."
+      ],
+      "priority": "P0",
+      "status": "done",
+      "evidence": [
+        "Public and machine-readable evidence now records binary32=8192 bytes, ordinary Q8=2304 bytes, RQ8=2113 bytes, and the exact 191/2304 RQ8 saving over ordinary Q8.",
+        "The root README contains one bounded whole-system speed disclaimer, no Mesh TensorFlow reference, and no execution-speed claim.",
+        "The complete SBCL 2.6.6 gate passed all six suites and the alpha.1 release audit passed 67 candidate files and 20 JSON documents with zero findings."
+      ]
+    },
+    {
+      "id": "step-080",
+      "kind": "step",
+      "title": "Publish the corrected alpha.1",
+      "input": "Accepted package documentation, public evidence, complete local gates, authenticated GitHub access, and a passing hosted workflow.",
+      "action": "Integrate the bounded changes, update repository description and topics, pin the repository on the owner profile, merge only after CI succeeds, create immutable tag v0.1.0-alpha.1, publish the corrected prerelease, and mark the prior alpha as superseded.",
+      "output": "A discoverable public alpha.1 release whose tag, release text, hosted CI, README, and machine-readable evidence agree.",
+      "verification": [
+        "Run the complete local test and release-audit gates before publication.",
+        "Verify the pull request checks pass and merged main equals the accepted commit.",
+        "Verify repository metadata and the owner profile pin.",
+        "Verify v0.1.0-alpha.1 peels to the accepted main commit and the GitHub prerelease targets that tag."
+      ],
+      "priority": "P0",
+      "status": "in_progress",
+      "evidence": []
     }
   ],
   "edges": [
@@ -209,6 +269,13 @@
     {"from": "step-030", "to": "step-040", "relation": "precedes"},
     {"from": "step-040", "to": "step-050", "relation": "precedes"},
     {"from": "goal-main", "to": "step-060", "relation": "implemented_by"},
-    {"from": "step-050", "to": "step-060", "relation": "precedes"}
+    {"from": "step-050", "to": "step-060", "relation": "precedes"},
+    {"from": "goal-main", "to": "step-070", "relation": "implemented_by"},
+    {"from": "goal-main", "to": "step-071", "relation": "implemented_by"},
+    {"from": "goal-main", "to": "step-080", "relation": "implemented_by"},
+    {"from": "step-060", "to": "step-070", "relation": "precedes"},
+    {"from": "step-060", "to": "step-071", "relation": "precedes"},
+    {"from": "step-070", "to": "step-080", "relation": "precedes"},
+    {"from": "step-071", "to": "step-080", "relation": "precedes"}
   ]
 }

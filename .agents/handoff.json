@@ -115,6 +115,36 @@
         "reports/release-acceptance.json",
         "https://github.com/bibi-chat/pure-lisp-kernel-lab/actions/runs/29668603547"
       ]
+    },
+    {
+      "stepRef": "step-070",
+      "checks": [
+        "Direct rational-quant gate passed 62 checks under SBCL 2.6.6",
+        "Runnable quantize/dequantize example returned the declared 32-value single-float result",
+        "Package documentation explicitly distinguishes the in-memory representation from a future stable serializer",
+        "No package source or test file changed"
+      ],
+      "artifacts": [
+        "packages/rational-quant/README.md",
+        ".agents/scopes/rq8_public_doc/scope.json"
+      ]
+    },
+    {
+      "stepRef": "step-071",
+      "checks": [
+        "Exact storage assertions passed for 8192-byte binary32, 2304-byte ordinary Q8, 2113-byte RQ8, and the 191/2304 saving",
+        "Complete SBCL 2.6.6 test-all gate passed all six suites",
+        "Alpha.1 release audit passed 67 candidate files and 20 JSON documents with zero findings",
+        "Root README contains no Mesh TensorFlow reference or execution-speed claim"
+      ],
+      "artifacts": [
+        "README.md",
+        "docs/EVIDENCE.md",
+        "docs/RELEASE_NOTES.md",
+        "reports/claims.json",
+        "reports/storage-evidence.json",
+        "reports/release-acceptance.json"
+      ]
     }
   ],
   "risks": [
@@ -152,7 +182,7 @@
     ]
   },
   "projectVariables": {
-    "release": "v0.1.0-alpha",
+    "release": "v0.1.0-alpha.1",
     "license": "Apache-2.0",
     "targetRepository": "pure-lisp-kernel-lab"
   }
