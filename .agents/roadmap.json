@@ -2,7 +2,7 @@
   "schema": "agent-roadmap/v1",
   "roadmapId": "pure-lisp-kernel-lab-alpha",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-19T02:14:07Z",
+  "updatedAt": "2026-07-19T02:25:30Z",
   "mainGoalId": "goal-main",
   "nodes": [
     {
@@ -251,7 +251,12 @@
       ],
       "priority": "P0",
       "status": "in_progress",
-      "evidence": []
+      "evidence": [
+        "Pull request 1 passed both hosted deterministic-gates checks, was rebased into main, and the exact merged main commit 3b9706dc9d981ef35fc963dc319b19ec07316cc4 passed GitHub Actions run 29669965590.",
+        "Repository description and six topics now expose Common Lisp, SBCL, quantization, numerical computing, compiler optimization, and functional programming.",
+        "Annotated tag v0.1.0-alpha.1 peels to accepted main commit 3b9706dc9d981ef35fc963dc319b19ec07316cc4; the matching GitHub prerelease is public and v0.1.0-alpha is visibly superseded without moving its tag.",
+        "Profile pin remains incomplete: the authenticated public API exposes no pinned-items mutation, the in-app browser is logged out, and the local Chrome accessibility bridge closed before returning page state."
+      ]
     }
   ],
   "edges": [

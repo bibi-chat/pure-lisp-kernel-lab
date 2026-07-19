@@ -1,7 +1,7 @@
 {
   "schema": "project-changelog/v1",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-19T02:14:07Z",
+  "updatedAt": "2026-07-19T02:25:30Z",
   "commitMapping": "Each entry maps to the Git commit whose subject exactly matches commitSubject.",
   "entries": [
     {
@@ -225,6 +225,26 @@
         "Roadmap and JSON validation passed."
       ],
       "commitSubject": "step(step-071): correct public RQ8 positioning"
+    },
+    {
+      "id": "change-0011",
+      "timestamp": "2026-07-19T02:25:30Z",
+      "stepId": "step-080",
+      "type": "publication",
+      "summary": "Merged the corrected alpha.1 positioning after hosted gates passed, published an immutable prerelease from the accepted main commit, marked the prior alpha as superseded, and updated repository discovery metadata; the profile pin remains a UI-only follow-up.",
+      "files": [
+        ".agents/roadmap.json",
+        ".agents/handoff.json",
+        ".agents/changelog.json"
+      ],
+      "verification": [
+        "Pull request 1 passed both hosted checks and merged by rebase.",
+        "Main-branch run 29669965590 passed on commit 3b9706dc9d981ef35fc963dc319b19ec07316cc4.",
+        "Remote annotated v0.1.0-alpha.1 peels to that accepted commit and its GitHub prerelease is public.",
+        "The prior alpha release is visibly superseded while its tag still peels to 511d1abfd5227ff8972fd7f5c6da4adb6c089460.",
+        "Description and six topics were verified; pinnedItems remains empty."
+      ],
+      "commitSubject": "step(step-080): record alpha1 publication"
     }
   ]
 }

@@ -145,6 +145,22 @@
         "reports/storage-evidence.json",
         "reports/release-acceptance.json"
       ]
+    },
+    {
+      "stepRef": "step-080",
+      "checks": [
+        "Pull request 1 and merged-main GitHub Actions run 29669965590 passed the deterministic gate",
+        "Remote annotated v0.1.0-alpha.1 tag peels to accepted commit 3b9706dc9d981ef35fc963dc319b19ec07316cc4",
+        "GitHub prerelease v0.1.0-alpha.1 is public and the immutable prior alpha is visibly superseded",
+        "Repository description and six discovery topics match the accepted positioning",
+        "Profile pinnedItems remains empty; profile pin is the only incomplete publication check"
+      ],
+      "artifacts": [
+        "https://github.com/bibi-chat/pure-lisp-kernel-lab/pull/1",
+        "https://github.com/bibi-chat/pure-lisp-kernel-lab/actions/runs/29669965590",
+        "https://github.com/bibi-chat/pure-lisp-kernel-lab/releases/tag/v0.1.0-alpha.1",
+        "https://github.com/bibi-chat/pure-lisp-kernel-lab/releases/tag/v0.1.0-alpha"
+      ]
     }
   ],
   "risks": [
@@ -171,6 +187,12 @@
       "state": "mitigated",
       "evidence": "Run 29668603547 built the hash-pinned official SBCL 2.6.6 source, passed all six unchanged gates, and completed the zero-error release audit on the exact implementation commit.",
       "nextCheck": "On future workflow or runtime changes, require a successful exact-commit hosted run."
+    },
+    {
+      "id": "risk-profile-pin",
+      "state": "open",
+      "evidence": "GitHub GraphQL reports no pinnedItems. The authenticated public API has no profile-pin mutation, the in-app browser is logged out, and repeated Chrome Computer Use attempts failed before returning page state.",
+      "nextCheck": "Sign in to GitHub in the in-app browser or manually pin pure-lisp-kernel-lab from Customize your pins, then verify pinnedItems through GraphQL."
     }
   ],
   "resume": {
