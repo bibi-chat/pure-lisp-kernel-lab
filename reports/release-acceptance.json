@@ -1,5 +1,5 @@
 {
-  "candidateFileCount": 64,
+  "candidateFileCount": 67,
   "checks": {
     "licenseAndClaimBoundaries": true,
     "noBinaryOrGeneratedArtifacts": true,
@@ -10,9 +10,9 @@
     "regularUtf8Files": true
   },
   "errors": [],
-  "parsedJsonDocumentCount": 17,
+  "parsedJsonDocumentCount": 20,
   "performanceClaim": false,
-  "release": "v0.1.0-alpha",
+  "release": "v0.1.0-alpha.1",
   "schema": "release-acceptance/v1",
   "scope": "tracked plus unignored working-tree files",
   "status": "passed"

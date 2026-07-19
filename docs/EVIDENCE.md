@@ -1,48 +1,59 @@
 # Evidence model
 
-The release separates semantic correctness, compiler cleanliness, storage
-arithmetic, performance measurement, and product claims.
+The alpha.1 positioning separates representation arithmetic from bounded test
+observations. Neither kind of evidence is generalized beyond its stated
+premises.
 
-## Fresh profiles
+## Exact storage deduction
 
-The standalone verifier compiles every accepted case twice in fresh SBCL
-processes:
+The comparison fixes the value count at 2,048 and the block size at 32, so
+there are exactly 64 blocks.
 
-1. semantic profile: safety fixed at 3;
-2. measured profile: speed 3, safety 1, debug 1.
+| Representation | Declared element payload | Bytes |
+|---|---:|---:|
+| binary32 | 2,048 values * 4 bytes | 8,192 |
+| ordinary Q8 | 2,048 quant bytes + 64 binary32 scales * 4 bytes | 2,304 |
+| RQ8/32/64 | 2,048 quant bytes + 64 numerator bytes + 1 exponent byte | 2,113 |
 
-Both profiles rerun deterministic differential cases and the benchmark input.
-The verifier rejects mutation, nondeterministic case providers, signaled errors,
-compiler warnings, changed source hashes, or unequal outcomes. A request for
-performance additionally applies the declared speed and allocation thresholds.
+The fair Q8 comparison is therefore:
+
+```text
+2304 - 2113 = 191 bytes
+191 / 2304 * 100 = 8.289930555555555 percent
+```
+
+The binary32 context comparison is:
+
+```text
+8192 - 2113 = 6079 bytes
+6079 / 8192 * 100 = 74.20654296875 percent
+```
+
+These are element-payload deductions. They exclude Lisp object headers,
+alignment, temporary storage, executable code, accuracy effects, and encoding
+work. The representation count is not a stable serialization contract.
+
+`reports/storage-evidence.json` records every component and exact fraction so a
+machine reader can recompute both comparisons without relying on rounded
+decimal text.
 
 ## Bounded release observations
 
-- Verifier integration: 8 positive and adversarial tests passed.
-- Lawful exact-integer e-graph: 13 checks passed.
-- RQ8: 62 checks passed in both direct and ASDF modes under a safety-3 minimum.
-- Mirror compiler: 37 checks passed in both direct and ASDF modes.
-- Mirror differential gate: 12 cases passed in semantic and measured
-  correctness profiles.
+`reports/test-evidence.json` records the following local alpha acceptance run:
 
-These observations establish the behavior of the checked files, fixtures,
-runtime, and domains. They do not establish portability, universal correctness,
-accuracy fitness, model quality, end-to-end system speed, or superiority over
-Mesh TensorFlow.
+- verifier integration: 8 positive and adversarial checks passed;
+- lawful exact-integer e-graph: 13 checks passed;
+- RQ8: 62 checks passed in direct mode and 62 in ASDF mode;
+- mirror compiler: 37 checks passed in direct mode and 37 in ASDF mode;
+- mirror differential gate: 12 cases passed in two fresh correctness profiles.
 
-## Storage deduction
-
-The RQ8 payload count follows directly from the representation: one quant byte
-per value, one numerator byte per 32 values, and one exponent byte per at most
-64 blocks. For 2,048 values, `2048 + 64 + 1 = 2113` bytes. Binary32 payload is
-`2048 * 4 = 8192` bytes. The payload saving is therefore exactly 6,079 bytes.
-
-This arithmetic does not measure Lisp object headers, alignment, temporary
-storage, encoding latency, inference latency, or accuracy loss.
+The report identifies SBCL 2.6.6 as the acceptance environment. These finite
+observations establish only the checked files, fixtures, environment, and
+domains. Alpha.1 does not relabel the recorded alpha run as new evidence.
 
 ## Claim policy
 
-`reports/claims.json` uses one of the evidence classes defined by the project:
-`fact`, `deduced`, `empirically-supported`, or `unknown`. A claim is never made
-stronger than its premises and warrant. Missing end-to-end evidence yields
-`unknown`, not a favorable extrapolation.
+`reports/claims.json` classifies representation arithmetic as `deduced` and
+finite differential results as `empirically-supported`. The release makes no
+claim about execution speed, cross-runtime portability, model quality, a
+general compiler, or stable serialization.

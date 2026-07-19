@@ -1,54 +1,62 @@
 # Pure Lisp Kernel Lab
 
-Pure Lisp Kernel Lab is an experimental SBCL laboratory for turning small,
-deterministic Common Lisp kernels into guarded typed Common Lisp, then accepting
-them only after fresh semantic and measured-profile verification.
+Pure Lisp Kernel Lab is an experimental SBCL laboratory for small,
+deterministic Common Lisp kernels. It keeps reference implementations beside
+guarded specialized implementations and accepts changes through deterministic
+semantic checks.
 
-This project is **not an SBCL fork**, **not a Mesh TensorFlow replacement**, and
-not a general Common Lisp or tensor compiler. It contains no Mesh TensorFlow or
-SBCL source code. SBCL remains the compiler and runtime; the generated output is
-ordinary typed Common Lisp compiled by SBCL.
+This project is not an SBCL fork and not a general Common Lisp or tensor
+compiler. SBCL compiles the ordinary typed Common Lisp produced by the bounded
+experiments.
 
-## What is useful here
+## What is included
 
-| Component | Community value | Accepted evidence |
+| Component | Bounded purpose | Accepted evidence |
 |---|---|---|
-| `tool/verify_kernel.py` | Reproducible semantic/performance gate for trusted pure Lisp cases | 8 positive and adversarial integration tests |
-| Lawful e-graph | Guarded equality saturation for closed exact-integer `CL:+`/`CL:*` expressions | 13 deterministic unit checks |
-| `rational-quant` | Experimental RQ8 codec and matrix-vector kernel with retained reference functions | 62 checks in direct and ASDF modes |
-| `mirror-kernel` | One symbolic 24-node graph lowered through an exact target cover into typed Lisp | 37 checks plus 12 fresh verifier cases in two profiles |
+| `tool/verify_kernel.py` | Fresh-process semantic verification for trusted pure Lisp cases | 8 positive and adversarial integration checks |
+| Lawful e-graph | Guarded equality saturation for closed exact-integer `CL:+` and `CL:*` expressions | 13 deterministic checks |
+| `rational-quant` | Experimental in-memory RQ8 representation and matrix-vector kernel with retained reference functions | 62 checks in direct and ASDF modes |
+| `mirror-kernel` | One symbolic 24-node graph lowered through an exact target cover into typed Lisp | 37 checks plus 12 fresh differential cases in two profiles |
 
-The verifier rejects nondeterministic fixtures, input mutation, benchmark
-mismatch, compiler warnings, output collisions, semantic differences, and
-failed requested performance gates. Cases and compiler files are trusted
-executable Lisp; this is a verifier, not a sandbox.
+Kernel cases and compiler files are trusted executable Lisp. The verifier is
+not a sandbox.
 
-## The efficiency result we can prove
+## Fair storage comparison
 
-RQ8 payload storage for `N` binary32 values is:
+The alpha.1 storage result compares equal 2,048-value payloads. Ordinary Q8 is
+defined here as one signed quant byte per value plus one binary32 scale for
+each 32-value block. RQ8 uses one signed quant byte per value, one numerator
+byte per block, and one exponent byte for the 64-block group.
 
-```text
-N quant bytes + (N / 32) numerator bytes + ceil((N / 32) / 64) exponent bytes
-```
+| Representation | Element payload arithmetic | Total bytes |
+|---|---:|---:|
+| binary32 | `2,048 * 4` | 8,192 |
+| ordinary Q8 | `2,048 + (64 * 4)` | 2,304 |
+| RQ8/32/64 | `2,048 + 64 + 1` | 2,113 |
 
-For one 2,048-value group, that is 2,113 bytes instead of 8,192 raw binary32
-payload bytes: 6,079 bytes fewer, or exactly `6079/8192` (about 74.21%) payload
-reduction. This excludes Lisp object headers, alignment, accuracy effects,
-encoding cost, and runtime speed. See `reports/storage-evidence.json`.
+RQ8 therefore saves exactly 191 element-payload bytes over ordinary Q8:
+`2304 - 2113 = 191`. The exact reduction is `191/2304`, or
+8.289930555555555 percent.
 
-No whole-system speed claim is made. The release has no end-to-end Mesh
-TensorFlow replacement or representative cross-system benchmark, so “faster
-than Mesh TensorFlow” remains unknown. The mirror verifier's measured profile
-is retained only as an independent correctness environment; its timing against
-an allocating semantic oracle is not published as a product performance claim.
+The binary32 row is context, not the primary baseline. Against that row, RQ8
+saves 6,079 bytes (`6079/8192`). All counts exclude Lisp object headers,
+alignment, temporary storage, executable code, and accuracy effects. They do
+not define a stable file or wire format.
+
+No whole-system speed claim is made. These storage deductions do not measure
+execution time or allocation behavior.
+
+The complete derivation is machine-readable in
+`reports/storage-evidence.json`; claim classes and boundaries are in
+`reports/claims.json`.
 
 ## Run the complete gate
 
 Requirements:
 
-- SBCL; the local alpha acceptance run used SBCL 2.6.6.
+- SBCL; the recorded bounded acceptance run used SBCL 2.6.6.
 - Python 3.10 or newer.
-- Git, for the exact release-content audit.
+- Git, for the release-content audit.
 
 ```sh
 export SBCL_BIN=/absolute/path/to/sbcl
@@ -57,8 +65,8 @@ python3 scripts/audit-release.py
 ```
 
 The runners derive the checkout path from their own files, start SBCL without
-user or system init files, and place FASLs, verifier logs, reports, and timing
-scratch data in disposable directories outside the checkout.
+user or system init files, and place generated scratch data outside the
+checkout.
 
 ## Verify one kernel
 
@@ -78,38 +86,27 @@ Read `references/kernel-contract.md` before creating a case and
 `references/lawful-egraph-contract.md` before enabling equality saturation.
 Floating-point reassociation is outside the lawful e-graph domain.
 
-## Packages
+## Package boundaries
 
 `packages/rational-quant/README.md` defines the RQ8 numeric, shape, fallback,
-and storage contract. It is intentionally SBCL-specific through `SB-KERNEL`
-and `SB-SYS` and makes no runtime performance claim.
+and storage contract. The implementation is intentionally SBCL-specific
+through `SB-KERNEL` and `SB-SYS`.
 
 `packages/mirror-kernel/README.md` defines the single supported symbolic graph:
-2,048 columns, 64 blocks of 32 weights, one denominator group per row. The
+2,048 columns, 64 blocks of 32 weights, and one denominator group per row. The
 strict generated function fails closed; the documented public wrapper retains
 the RQ8 fallback.
 
-## Codex skill boundary
-
-`skill/` is the validated prompt wrapper used with this checkout. Portfolio
-analysis found that the existing `compile-pure-lisp` skill already owns this
-workflow, with no duplicate name or lexical trigger-overlap candidate in the
-inspected catalog. The treatment is therefore **keep one skill**, not create a
-second “SBCL compiler” skill. RQ8 and mirror-kernel remain examples and
-references, not additional agent skills. See `reports/portfolio-treatment.json`.
-
 ## Evidence and limits
 
-- `reports/test-evidence.json` records the bounded local acceptance counts.
-- `reports/claims.json` separates facts, deductions, empirical support, and
-  unknowns.
-- `reports/release-acceptance.json` is regenerated by the release audit.
-- `docs/EVIDENCE.md` explains what each gate does and does not establish.
-- `docs/RELEASE_NOTES.md` contains the alpha release notes.
+- `reports/test-evidence.json` records bounded local acceptance counts.
+- `reports/claims.json` separates deductions, empirical support, and excluded
+  conclusions.
+- `docs/EVIDENCE.md` explains the storage arithmetic and test boundaries.
+- `docs/RELEASE_NOTES.md` contains the alpha.1 notes.
 
-Do not generalize a fixture result to a language, model, runtime, machine, or
-whole system. Contributions that claim speed or allocation improvements must
-include a fresh merged verifier report and its exact workload boundary.
+Do not generalize fixture results to a language, model, machine, or whole
+system.
 
 ## License
 

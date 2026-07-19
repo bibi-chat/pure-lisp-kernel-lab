@@ -1,51 +1,73 @@
 {
   "schema": "reasoned-claims/v1",
+  "release": "v0.1.0-alpha.1",
+  "positioningContract": "release-positioning/v0.1.0-alpha.1",
   "claims": [
     {
-      "id": "rq8-payload-storage-2048",
-      "proposition": "The declared RQ8 payload uses fewer bytes than raw binary32 payload for one 2048-value group.",
-      "conclusion": "RQ8 uses 2113 payload bytes instead of 8192, saving exactly 6079 bytes.",
+      "id": "rq8-versus-q8-payload-storage-2048",
+      "proposition": "For the declared 2048-value payload, RQ8/32/64 uses fewer element-payload bytes than ordinary Q8 with one binary32 scale per 32-value block.",
+      "conclusion": "Ordinary Q8 uses 2304 bytes and RQ8 uses 2113 bytes, so RQ8 saves exactly 191 bytes, or 191/2304 (8.289930555555555 percent).",
       "claimClass": "deduced",
       "premises": [
-        "There is one signed quant byte per value.",
-        "There is one numerator byte per 32 values.",
-        "There is one exponent byte per at most 64 blocks.",
-        "A binary32 value occupies four payload bytes."
+        "The fixture contains 2048 values in 64 blocks of 32 values.",
+        "Ordinary Q8 uses one signed quant byte per value and one four-byte binary32 scale per block.",
+        "RQ8/32/64 uses one signed quant byte per value, one numerator byte per block, and one exponent byte for the 64-block group."
       ],
-      "warrant": "Direct integer arithmetic over the declared representation.",
-      "countercheck": "The comparison excludes object headers, alignment, temporary buffers, and executable code.",
-      "uncertainty": "None for the payload count when the representation premises hold.",
-      "boundary": "Does not establish accuracy, encoding cost, latency, throughput, or model quality."
+      "warrant": "2048 + (64 * 4) = 2304; 2048 + 64 + 1 = 2113; 2304 - 2113 = 191.",
+      "countercheck": "Changing the ordinary-Q8 scale representation or block layout changes the baseline and requires a new comparison.",
+      "uncertainty": "None for the integer payload count when the representation premises hold.",
+      "boundary": "Element payload only; excludes object headers, alignment, temporary storage, executable code, accuracy effects, encoding work, and execution characteristics."
+    },
+    {
+      "id": "rq8-versus-binary32-payload-storage-2048",
+      "proposition": "The declared RQ8/32/64 element payload uses fewer bytes than raw binary32 values for the same 2048-value fixture.",
+      "conclusion": "Binary32 uses 8192 bytes and RQ8 uses 2113 bytes, so RQ8 saves exactly 6079 bytes, or 6079/8192 (74.20654296875 percent).",
+      "claimClass": "deduced",
+      "premises": [
+        "The fixture contains 2048 values.",
+        "A binary32 value occupies four payload bytes.",
+        "The RQ8/32/64 component counts total 2113 bytes."
+      ],
+      "warrant": "2048 * 4 = 8192; 8192 - 2113 = 6079.",
+      "countercheck": "The fair quantized baseline is the separate ordinary-Q8 comparison, not this raw-value context row.",
+      "uncertainty": "None for the integer payload count when the representation premises hold.",
+      "boundary": "Element payload only; does not define a serialized artifact or establish any system-level conclusion."
     },
     {
       "id": "mirror-bit-exact-bounded",
       "proposition": "The generated mirror kernel preserves the retained reference outcomes inside the checked 2048-column domain.",
-      "conclusion": "The deterministic release fixtures produced bit-equal binary32 output in both fresh verifier profiles.",
+      "conclusion": "The deterministic release fixtures produced bit-equal binary32 output in two fresh correctness profiles.",
       "claimClass": "empirically-supported",
       "premises": [
         "The direct and ASDF mirror suites each passed 37 checks.",
-        "Twelve deterministic differential cases passed in fresh semantic and measured correctness profiles.",
+        "Twelve deterministic differential cases passed in two fresh correctness profiles.",
         "The strict candidate disabled the public fallback during differential verification."
       ],
       "warrant": "Deterministic differential testing against the retained semantic oracle.",
       "countercheck": "Unsupported graph shapes and incomplete targets were separately required to fail closed.",
       "uncertainty": "The finite fixtures do not enumerate every valid input bit pattern or SBCL build.",
-      "boundary": "Does not establish a general compiler, cross-runtime portability, or material speedup."
+      "boundary": "Does not establish a general compiler, cross-runtime portability, model quality, or stable serialization."
     },
     {
       "id": "whole-system-faster",
-      "proposition": "This alpha is more efficient than Mesh TensorFlow as a whole.",
+      "proposition": "The alpha.1 release is faster as a whole system.",
       "conclusion": "Not established by the available evidence.",
       "claimClass": "unknown",
       "premises": [
-        "The alpha implements bounded Lisp kernels and one symbolic graph slice.",
-        "It does not implement the supported Mesh TensorFlow surface end to end.",
-        "No representative cross-system workload was run for this release."
+        "The release contains bounded Common Lisp kernels and one symbolic graph slice.",
+        "No representative end-to-end system workload was run for this release."
       ],
-      "warrant": "A whole-system comparative claim requires both comparable implementations and a representative measured workload.",
-      "countercheck": "A payload-storage deduction and bounded kernel tests cannot be generalized to end-to-end system efficiency.",
-      "uncertainty": "The missing implementation and benchmark prevent a supported direction of comparison.",
-      "boundary": "Future evidence may change this classification; the alpha does not."
+      "warrant": "A whole-system speed claim requires a comparable implementation and representative measured workload.",
+      "countercheck": "Storage arithmetic and bounded semantic checks cannot establish execution speed.",
+      "uncertainty": "The missing end-to-end benchmark prevents a supported direction of comparison.",
+      "boundary": "Future evidence may change this classification; alpha.1 does not."
     }
+  ],
+  "excludedClaims": [
+    "execution speed",
+    "cross-runtime portability",
+    "model quality",
+    "general compiler capability",
+    "stable serialization"
   ]
 }

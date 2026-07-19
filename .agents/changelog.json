@@ -1,7 +1,7 @@
 {
   "schema": "project-changelog/v1",
   "project": "Pure Lisp Kernel Lab",
-  "updatedAt": "2026-07-19T01:31:12Z",
+  "updatedAt": "2026-07-19T02:14:07Z",
   "commitMapping": "Each entry maps to the Git commit whose subject exactly matches commitSubject.",
   "entries": [
     {
@@ -178,6 +178,53 @@
         "Roadmap validation returned no remaining next step and dispatch validation returned no active or ready scope."
       ],
       "commitSubject": "step(step-060): record passing hosted gates"
+    },
+    {
+      "id": "change-0009",
+      "timestamp": "2026-07-19T02:14:07Z",
+      "stepId": "step-070",
+      "type": "documentation",
+      "summary": "Clarified that rational-quant is an in-memory SBCL representation and kernel package, added a runnable unary quantize/dequantize example, and reserved codec terminology for a future stable serializer.",
+      "files": [
+        "packages/rational-quant/README.md",
+        ".agents/scopes/rq8_public_doc/scope.json"
+      ],
+      "verification": [
+        "The direct rational-quant gate passed all 62 deterministic checks under SBCL 2.6.6.",
+        "The documented example executed and returned a fresh 32-value decoded single-float array.",
+        "The README explicitly disclaims a stable byte, file, or wire format.",
+        "No package source or test file changed."
+      ],
+      "commitSubject": "step(step-070): clarify rational quant contract"
+    },
+    {
+      "id": "change-0010",
+      "timestamp": "2026-07-19T02:14:07Z",
+      "stepId": "step-071",
+      "type": "release-correction",
+      "summary": "Corrected the public RQ8 comparison to lead with ordinary Q8 plus binary32 block scales, retained binary32 as context, preserved machine-readable compatibility fields, and aligned the alpha.1 release audit and bounded claim language.",
+      "files": [
+        "README.md",
+        "docs/EVIDENCE.md",
+        "docs/RELEASE_NOTES.md",
+        "reports/claims.json",
+        "reports/storage-evidence.json",
+        "reports/release-acceptance.json",
+        "scripts/audit-release.py",
+        ".agents/index.md",
+        ".agents/roadmap.json",
+        ".agents/handoff.json",
+        ".agents/changelog.json",
+        ".agents/scopes/release_positioning/scope.json",
+        ".agents/scopes/publish_alpha1/scope.json"
+      ],
+      "verification": [
+        "Exact storage assertions passed for 8192-byte binary32, 2304-byte ordinary Q8, 2113-byte RQ8, and a 191/2304 saving.",
+        "The complete SBCL 2.6.6 test-all gate passed all six suites.",
+        "The release audit passed 67 candidate files and 20 JSON documents with zero findings.",
+        "Roadmap and JSON validation passed."
+      ],
+      "commitSubject": "step(step-071): correct public RQ8 positioning"
     }
   ]
 }
